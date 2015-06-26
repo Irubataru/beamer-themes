@@ -19,9 +19,3 @@ boxes that I find pleasing.
 My theme for the Lattice Conference 2015. It has some simple geometric shapes and matching boxes.
 The colour theme I got from here (slightly modified)
 https://color.adobe.com/Flat-UI-color-theme-2469224/?showPublished=true
-
-# "jonasgoethe"
-A variant with the Goethe logo, its reduntant by I have it for completeness
-
-# "jonascoop"
-Variant with an additional field for collaborators, also redundant
