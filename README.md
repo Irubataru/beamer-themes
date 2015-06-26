@@ -28,18 +28,18 @@ Screenshots:
 <table>
   <tr>
     <td>
-      <img src="/../screenshots/screenshots/light.theme/light_theme-1.png?raw=true" alt="Title Page" width="400">
+      <img src="/../screenshots/screenshots/light.theme/light_theme-1.png?raw=true" alt="Title Page" width="200">
     </td>
     <td>
-      <img src="/../screenshots/screenshots/light.theme/light_theme-2.png?raw=true" alt="Items" width="400">
+      <img src="/../screenshots/screenshots/light.theme/light_theme-2.png?raw=true" alt="Items" width="200">
     </td>
   </tr>
   <tr>
     <td>
-      <img src="/../screenshots/screenshots/light.theme/light_theme-3.png?raw=true" alt="Boxes 1" width="400">
+      <img src="/../screenshots/screenshots/light.theme/light_theme-3.png?raw=true" alt="Boxes 1" width="200">
     </td>
     <td>
-      <img src="/../screenshots/screenshots/light.theme/light_theme-4.png?raw=true" alt="Boxes 2" width="400">
+      <img src="/../screenshots/screenshots/light.theme/light_theme-4.png?raw=true" alt="Boxes 2" width="200">
     </td>
   </tr>
 </table>
