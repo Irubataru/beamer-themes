@@ -1,0 +1,48 @@
+\mode<presentation>
+
+% Frame title
+\defbeamertemplate*{frametitle}{corporate}[1][]
+{
+\vskip1cm%
+  \begin{beamercolorbox}[wd=\paperwidth,ht=.1cm]{frametitle} 
+  \begin{tikzpicture}
+  \useasboundingbox[fill=white](0,0) rectangle(\the\paperwidth,1.2);
+  \usebeamercolor{palette primary}
+  \fill[bg] (0,0) rectangle(2.95,1.2);
+  \usebeamercolor{palette secondary}
+  \fill[bg] (3.05,0) rectangle(\the\paperwidth,1.2);
+  \usebeamercolor{header text}
+   \ifx\insertframesubtitle\@empty%
+      {\node[anchor=west, color=fg,font=\large] at (3.2,0.61){\insertframetitle};}
+      \else%
+      {\node[anchor= west, color=fg,font=\large] at (3.2,0.81){\insertframetitle};%
+       \node[anchor= west, color=fg,font=\small] at (3.3,0.41){$\hookrightarrow$\hskip3pt\insertframesubtitle};}%
+      \fi
+  \end{tikzpicture}
+  \end{beamercolorbox}
+}
+
+\defbeamertemplate*{footline}{corporate}
+{
+  \begin{beamercolorbox}[wd=\paperwidth,ht=3ex,dp=1ex]{frametitle}
+    \begin{tikzpicture}
+      \useasboundingbox[fill=white](0,0) rectangle(\the\paperwidth,2.25ex);
+      \usebeamercolor{palette primary}
+      \fill[bg] (0,0) rectangle (2.95,3ex);
+      \usebeamercolor{palette secondary}
+      \fill[bg] (3.05,0) rectangle(\the\paperwidth,3ex);
+      \usebeamercolor{author}
+      \ifx\insertauthor\@empty%
+      \else%
+      {\node[anchor=west,color=fg,font=\tiny] (author) at (3.2,1.5ex) {\insertauthor};
+        \ifx\insertshortinstitute\@empty%
+        \else%
+        {\node[anchor=west,color=fg,font=\tiny, right=0.25em of author] {(\insertshortinstitute)};}}%
+        \fi
+      \fi
+      \node[anchor=east,color=fg, font=\tiny] at(\the\paperwidth - 0.3, 1.5ex) {$\insertframenumber$/$\inserttotalframenumber$};
+    \end{tikzpicture}
+  \end{beamercolorbox}
+}
+
+\mode<all>
