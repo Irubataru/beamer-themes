@@ -1,0 +1,151 @@
+\mode<presentation>
+
+\RequirePackage{xifthen}
+\RequirePackage{xparse}
+
+\setbeamertemplate{sections/subsections in toc}[square]
+\setbeamertemplate{items}[square]
+
+% Block environments
+
+\NewDocumentEnvironment{quoteblock}{m o}%
+{
+  \par\vskip\medskipamount%
+  \usebeamercolor{palette quaternary}
+  \begin{tikzpicture}
+    \node [
+      draw=fg, inner sep=2ex, 
+      text width=\paperwidth - 2cm - 5ex, 
+      minimum width=\paperwidth - 2cm - 1ex,
+      rounded corners
+    ] (BOXCONTENT) \bgroup%
+    \usebeamerfont{beamer body}
+}{
+  \egroup;
+  \usebeamercolor{palette quatenary}
+  \ifthenelse{\isempty{#1}}%
+  {}%
+  {
+    \node [
+      fill=fg,
+      anchor=west,
+      text=white,
+      rounded corners
+    ] at ([shift={(5pt,0)}]BOXCONTENT.north west) {#1};
+  }
+  \IfNoValueF{#2}
+  {
+    \node [
+      fill=white,
+      anchor=east,
+      text=bg
+    ] at ([shift={(-5pt,0)}]BOXCONTENT.south east) {#2};
+  }
+  \end{tikzpicture}
+  \vskip\smallskipamount
+}
+
+\defbeamertemplate*{block begin}{cleancode}
+{
+  \par\vskip\medskipamount%
+  \usebeamercolor{block title}
+  \begin{tikzpicture}
+    \node [
+      draw=fg, inner sep=2ex, 
+      text width=\paperwidth - 2cm - 5ex, 
+      minimum width=\paperwidth - 2cm - 1ex,
+      rounded corners
+    ] (BOXCONTENT) \bgroup%
+    \usebeamerfont{beamer body}
+    \usebeamercolor{block body}
+}
+
+\defbeamertemplate*{block end}{cleancode}
+{
+  \egroup;
+  \usebeamercolor{block title}
+  \ifx\insertblocktitle\@empty
+  \else%
+  {
+    \node[
+      fill=bg,
+      anchor=west,
+      text=fg,
+      rounded corners
+    ] at ([shift={(5pt,0)}]BOXCONTENT.north west) {\insertblocktitle};
+  }
+  \fi
+  \end{tikzpicture}
+  \vskip\smallskipamount
+}
+
+\defbeamertemplate*{block example begin}{cleancode}
+{
+  \par\vskip\medskipamount%
+  \usebeamercolor{block title example}
+  \begin{tikzpicture}
+    \node [
+      draw=fg, inner sep=2ex, 
+      text width=\paperwidth - 2cm - 5ex, 
+      minimum width=\paperwidth - 2cm - 1ex,
+      align=left, rounded corners
+    ] (BOXCONTENT) \bgroup \noindent%
+    \usebeamerfont{beamer body}%
+    \usebeamercolor{block body}
+}
+
+\defbeamertemplate*{block example end}{cleancode}
+{
+  \egroup;
+  \usebeamercolor{block title example}
+  \ifx\insertblocktitle\@empty
+  \else%
+  {
+    \node [
+      fill=bg,
+      anchor=west,
+      text=fg, 
+      rounded corners
+    ] at ([shift={(5pt,0)}]BOXCONTENT.north west) {\insertblocktitle};
+  }
+  \fi
+  \end{tikzpicture}
+  \vskip\smallskipamount
+}
+
+\defbeamertemplate*{block alerted begin}{cleancode}
+{
+  \par\vskip\medskipamount%
+  \usebeamercolor{block title alerted}
+  \begin{tikzpicture}
+    \node [
+      draw=fg, inner sep=2ex, 
+      text width=\paperwidth - 2cm - 5ex, 
+      minimum width=\paperwidth - 2cm - 1ex,
+      align=left, rounded corners
+    ] (BOXCONTENT) \bgroup \noindent%
+    \usebeamerfont{beamer body}%
+    \usebeamercolor{block body}
+}
+
+\defbeamertemplate*{block alerted end}{cleancode}
+{
+  \egroup;
+  \usebeamercolor{block title alerted}
+  \ifx\insertblocktitle\@empty
+  \else%
+  {
+    \node [
+      fill=bg,
+      anchor=west,
+      text=fg, 
+      rounded corners
+    ] at ([shift={(5pt,0)}]BOXCONTENT.north west) {\insertblocktitle};
+  }
+  \fi
+  \end{tikzpicture}
+  \vskip\smallskipamount
+}
+
+\mode
+<all>
