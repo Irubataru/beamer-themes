@@ -90,19 +90,23 @@
 {
   \par\vskip\medskipamount%
   \usebeamercolor{block title}
+  \ifx\insertblocktitle\@empty\newcommand{\yskiplength}{1.5ex}
+  \else\newcommand{\yskiplength}{2ex}
+  \fi
   \begin{tikzpicture}
     \node [
       draw=fg,
       inner sep = 1ex,
+      inner ysep = \yskiplength,
       text width=\paperwidth - 2cm - 5ex, 
       minimum width=\paperwidth - 2cm - 1ex,
       rounded corners=1pt
     ] (BOXCONTENT) \bgroup%
     \usebeamerfont{beamer body}
     \usebeamercolor{block body}
-    \ifx\insertblocktitle\@empty
-    \else \vspace{3pt}
-    \fi
+    %\ifx\insertblocktitle\@empty%
+    %\else\vphantom{\vbox to 1.2em {\vfill}}%
+    %\fi
 }
 
 \defbeamertemplate*{block end}{jonaslight}
@@ -136,19 +140,20 @@
 {
   \par\vskip\medskipamount%
   \usebeamercolor{block alerted title}
+  \ifx\insertblocktitle\@empty\newcommand{\yskiplength}{1.5ex}
+  \else\newcommand{\yskiplength}{2ex}
+  \fi
   \begin{tikzpicture}
     \node [
       draw=fg,
       inner sep = 1ex,
+      inner ysep = \yskiplength,
       text width=\paperwidth - 2cm - 5ex, 
       minimum width=\paperwidth - 2cm - 1ex,
       rounded corners=1pt
     ] (BOXCONTENT) \bgroup%
     \usebeamerfont{beamer body}
     \usebeamercolor{block body}
-    %\ifx\insertblocktitle\@empty
-    %\else \vspace{3pt}
-    %\fi
 }
 
 \defbeamertemplate*{block alerted end}{jonaslight}
@@ -182,10 +187,14 @@
 {
   \par\vskip\medskipamount%
   \usebeamercolor{palette primary}
+  \ifx\insertblocktitle\@empty\newcommand{\yskiplength}{1.5ex}
+  \else\newcommand{\yskiplength}{2ex}
+  \fi
   \begin{tikzpicture}
     \node [
       draw=bg,
       inner sep = 1ex,
+      inner ysep = \yskiplength,
       text width=\paperwidth - 2cm - 5ex, 
       minimum width=\paperwidth - 2cm - 1ex,
       rounded corners=1pt
@@ -207,7 +216,7 @@
       text=bg,
       inner ysep = 0pt,
       rounded corners = 0pt
-    ] at ([shift={(5pt,0)}]BOXCONTENT.north west) {#1};
+    ] at ([shift={(5pt,0)}]BOXCONTENT.north west) {#1};}
     \clip[rounded corners = 1pt] (BOXCONTENT.south west) rectangle (BOXCONTENT.north east);
     \fill[bg] (BOXCONTENT.south west) -- +(.1,0) -- +(0,.1);
     \fill[bg] (BOXCONTENT.south east) -- +(-.1,0) -- +(0,.1);
@@ -215,7 +224,6 @@
     \fill[bg] (BOXCONTENT.north east) -- +(-.1,0) -- +(0,-.1);
     %\node[inner sep=0, minimum size=3pt, draw=fg, circle] at ([shift={(225:.15)}] BOXCONTENT.north east) {};
     \node[inner sep=0, minimum size=1pt, fill=bg, circle] at ([shift={(225:.12)}] BOXCONTENT.north east) {};
-  }
   \end{tikzpicture}
   \vskip\smallskipamount
 }
