@@ -1,0 +1,20 @@
+\mode<presentation>
+
+% Frame title
+\defbeamertemplate*{frametitle}{jonaslight}[1][]
+{
+  %\vskip5pt
+  \ifx\insertframesubtitle\@empty%
+  \begin{beamercolorbox}[wd=\paperwidth,ht=1cm]{frametitle} 
+  \else%
+  \begin{beamercolorbox}[wd=\paperwidth,ht=1.6cm]{frametitle} 
+  \fi
+    \hskip1ex\usebeamercolor{frametitle} \usebeamerfont{frametitle} \insertframetitle
+    \ifx\insertframesubtitle\@empty%
+    \else%
+      \\ \hskip1.3ex\usebeamercolor{framesubtitle} \usebeamerfont{framesubtitle} \insertframesubtitle
+    \fi
+  \end{beamercolorbox}
+}
+
+\mode<all>
