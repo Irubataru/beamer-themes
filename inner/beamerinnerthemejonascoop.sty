@@ -1,0 +1,137 @@
+\mode<presentation>
+
+\setbeamertemplate{background}{
+  \begin{tikzpicture}
+  \useasboundingbox (0,0) rectangle(\the\paperwidth,\the\paperheight);
+  \usebeamercolor{palette base}
+  \fill[color=bg] (0,3) rectangle (\the\paperwidth,\the\paperheight);
+  %\coordinate (title corner) at (\the\paperwidth,3);
+  \usebeamercolor{palette primary}
+  \fill[color=bg] (0,0) rectangle(2.95,2.9);
+  \usebeamercolor{palette secondary}
+  \fill[color=bg] (3.05,0) rectangle(\the\paperwidth,2.9);
+  \ifnum\thepage>1\relax%
+   \fill[white,opacity=1] (0,0) rectangle(\the\paperwidth,\the\paperheight);
+   \fi
+  \end{tikzpicture}
+}
+
+% Title page
+\defbeamertemplate*{title page}{jonas}[1][]
+{ 
+  \begin{tikzpicture}[remember picture, overlay]
+    \usebeamercolor{title page header}
+    \coordinate (title corner) at ([shift={(0,3)}]current page.south east);
+    \ifx\insertsubtitle\@empty%
+    % Insert title
+    {
+      \node[text=fg,anchor=south east] at ([shift={(-1em,+1em)}]title corner) {%
+        \usebeamerfont{title}\inserttitle%
+      };}
+    \else%
+    % Insert subtitle, if one exists, doesn't work with overflow
+    {
+      \node[text=fg,anchor=south east,align=left] at ([shift={(-2em,+1em)}]title corner) {%
+        \usebeamerfont{title}\inserttitle \\
+        \hskip.4cm$\hookrightarrow$\hskip3pt\usebeamerfont{subtitle}\insertsubtitle
+      };}
+    \fi%
+
+    % Insert author
+    \coordinate (info corner) at ([shift={(3.05,2.9)}]current page.south west);
+    \usebeamercolor{author}
+    \node[text=fg,anchor=north west,align=left] at ([shift={(.5em,-.5em)}]info corner) (author) {%
+      \usebeamerfont{author}\insertauthor%
+        % Insert institute, if it has been given
+        \ifx\insertinstitute\@empty%
+        \else%
+         {\usebeamerfont{institute}\hskip1em-\hskip0.25em\insertinstitute}
+        \fi%
+      };
+      
+      % Insert collaborator if given
+      \ifx\insertcollaborator\@empty%
+      \else%
+      {\node[text=fg,anchor=north west, align=left] at ([shift={(.5cm,-.1em)}]author.south west) {%
+          \usebeamerfont{institute} in collaboration with \insertcollaborator% 
+          % Insert collaborator's institute if given
+          \ifx\insertcollaboratorinst\@empty%
+          \else%
+            {\usebeamerfont{institute} \hskip0.25em (\insertcollaboratorinst)}
+          \fi%
+        };}
+      \fi
+
+      % Insert date
+      \node[text=fg,anchor=south east] at ([shift={(-.5em,.5em)}]current page.south east) {\usebeamerfont{author}\insertdate};
+  \end{tikzpicture}
+}
+
+% Block environments
+
+\defbeamertemplate*{block begin}{jonas}
+{
+  \par\vskip\medskipamount%
+  \usebeamercolor{palette tertiary}
+  \begin{tikzpicture}
+    \node [draw=bg, inner sep=2ex, text width=\paperwidth - 2cm - 4ex, minimum width=\paperwidth - 2cm] (BOXCONTENT) \bgroup%
+    \usebeamerfont{beamer body}
+}
+
+\defbeamertemplate*{block end}{jonas}
+{
+  \egroup;
+  \usebeamercolor{palette secondary}
+  \ifx\insertblocktitle\@empty
+  \else%
+  {
+    \node[fill=fg,anchor=west,text=bg] at ([shift={(5pt,0)}]BOXCONTENT.north west) {\insertblocktitle};
+  }
+  %{\node [draw=bg,right,inner sep=1.5ex, text width=\paperwidth - 2cm - 3ex, minimum width=\paperwidth - 2cm,anchor=south west] %
+    %at (BOXCONTENT.north west) {\usebeamerfont{block title}\insertblocktitle};
+  %}
+  \fi
+  \end{tikzpicture}
+  \vskip\smallskipamount
+}
+
+\defbeamertemplate*{block alerted begin}{jonas}
+{
+  \par\vskip\medskipamount%
+  \usebeamercolor{palette tertiary}
+  \begin{tikzpicture}
+    \node [draw=bg, inner sep=2ex, text width=\paperwidth - 2cm - 4ex, minimum width=\paperwidth - 2cm,align=left] (BOXCONTENT) \bgroup \noindent%
+    \usebeamerfont{beamer body}%
+}
+
+\defbeamertemplate*{block alerted end}{jonas}
+{
+  \egroup;
+  \usebeamercolor{palette primary}
+  \ifx\insertblocktitle\@empty
+  \else%
+  {
+    \node[fill=fg,anchor=west,text=bg] at ([shift={(5pt,0)}]BOXCONTENT.north west) {\insertblocktitle};
+  }
+  %{\node [fill=bg,text=fg,right,inner sep=1.5ex, text width=\paperwidth - 2cm - 3ex, minimum width=\paperwidth - 2cm,anchor=south west] %
+    %at (BOXCONTENT.north west) {\usebeamerfont{block title}\insertblocktitle};
+  %}
+  \fi
+  \end{tikzpicture}
+  \vskip\smallskipamount
+}
+
+%\defbeamertemplate*{block end}{jonas}
+%{
+  %\egroup;
+  %\usebeamercolor{palette primary}
+  %\node [draw=bg,right, inner xsep=1ex, inner ysep=2pt ,fill=fg, outer sep=0pt, text height=2ex, anchor=south west] at ([shift={(-.5em,-.2em)}]BOXCONTENT.north west)%
+   %(BOXHEADER) {\insertblocktitle};
+   %\fill [color=bg] (BOXHEADER.south west) -- +(.5em,-.5em) -- +(.5em,0) -- cycle;
+   %\fill [color=bg] (BOXHEADER.north east) -- +(-.5em,.5em) -- +(-.5em,0) -- cycle;
+  %\end{tikzpicture}
+  %\vskip\smallskipamount
+%}
+
+\mode
+<all>
