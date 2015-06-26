@@ -50,42 +50,48 @@
     \node[draw=bg,thin,circle,inner sep=0,minimum size=.7cm] at (midpoint) {};
     \node[fill=bg,thin,circle,inner sep=0,minimum size=.1cm] at (midpoint) {};
 
-    \coordinate (title corner) at ([shift={(0,-3)}] current page.east);
+    \coordinate (title corner) at ([shift={(-2em,-2)}] current page.east);
     \usebeamercolor{title page header}
     \ifx\insertsubtitle\@empty%
     % Insert title
     {
-      \node[text=fg,anchor=south east,align=right,text width=10cm] at ([shift={(-2em,+1em)}]title corner) {%
+      \node[text=fg,anchor=south east,align=right,text width=10cm] at (title corner) {%
         \usebeamerfont{title}\inserttitle%
       };}
     \else%
     % Insert subtitle, if one exists, doesn't work with overflow
     {
-      \node[text=fg,anchor=south east,align=right] at ([shift={(-2em,+1em)}]title corner) {%
-        \usebeamerfont{title}\inserttitle \\
+      \node[text=fg,anchor=south east,align=right,text width=10cm] at ([yshift=1em]title corner) {%
+        \usebeamerfont{title}\inserttitle \\[5pt]
         \usebeamerfont{subtitle}\insertsubtitle
       };}
     \fi%
 
-    \coordinate (info corner) at ([shift={(0,-.7)}] title corner);
+    %Insert date
+    \usebeamercolor{date}
+    \node[text=fg,anchor=south east] (datenode) at ([shift={(-2em, 1em)}] current page.south east) {%
+      \usebeamerfont{date}\insertdate
+    };
+
     \usebeamercolor{author}
-    \node[text=fg,anchor=north east,align=right] at ([shift={(-2em,0)}]info corner) (author) {%
+    \node[text=fg,anchor=south east,align=right] at (datenode.north east) (author) {%
       \usebeamerfont{author}\insertauthor%
-        % Insert institute, if it has been given
-        \ifx\insertinstitute\@empty%
-        \else%
-         {\usebeamerfont{institute}\hskip1em-\hskip0.25em\insertinstitute}
-        \fi%
       };
+
+    \ifx\insertinstitute\@empty%
+    \else%
+    \usebeamercolor{institute}
+    \node[text=fg,anchor=south west,align=left] (institutenode) at ([shift={(1em, 1em)}] current page.south west) {%
+      \usebeamerfont{institute}\insertinstitute%
+      };
+    \fi%
       
-      % Insert date
-      %\node[text=fg,anchor=south east] at ([shift={(-2em,.5em)}]current page.south east) {\usebeamerfont{author}\insertdate};
   \end{tikzpicture}
 }
 
-% ----- %
-% block %
-% ----- %
+% ------ %
+% blocks %
+% ------ %
 \defbeamertemplate*{block begin}{jonaslight}
 {
   \par\vskip\medskipamount%
