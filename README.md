@@ -11,6 +11,8 @@ http://tex.stackexchange.com/questions/146529/design-a-custom-beamer-theme-from-
 
 I used it to learn how to make my own beamer themes.
 
+Screenshots:
+
 <table>
   <tr>
     <td>
@@ -32,6 +34,8 @@ The theme I prefer to use when giving a programming-related talk. It is mostly e
 overloaded boxes that I find pleasing.
 
 This package needs the [dvipsnames,usenames] options for beamer.
+
+Screenshots:
 
 <table>
   <tr>
