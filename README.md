@@ -88,3 +88,11 @@ Screenshots:
     </td>
   </tr>
 </table>
+
+# Installation
+
+Standard LaTeX installation, put the files somewhere LaTeX can find them. I normally put these in
+
+```bash
+$TEXMFHOME/tex/latex/beamer/themes/
+```
