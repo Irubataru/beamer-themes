@@ -33,7 +33,7 @@
 % ---------- %
 % Title page %
 % ---------- %
-\defbeamertemplate*{title page}{jonaslight}[1][]
+\defbeamertemplate*{title page}{LightRound}[1][]
 { 
   \begin{tikzpicture}[overlay,remember picture]
     \clip ([shift={(.1,.1)}] current page.south west) rectangle ([shift={(-.1,-.1)}] current page.north east);
@@ -92,7 +92,7 @@
 % ------ %
 % blocks %
 % ------ %
-\defbeamertemplate*{block begin}{jonaslight}
+\defbeamertemplate*{block begin}{LightRound}
 {
   \par\vskip\medskipamount%
   \usebeamercolor{block title}
@@ -115,7 +115,7 @@
     %\fi
 }
 
-\defbeamertemplate*{block end}{jonaslight}
+\defbeamertemplate*{block end}{LightRound}
 {
   \egroup;
   \usebeamercolor{block title}
@@ -142,7 +142,7 @@
   \vskip\smallskipamount
 }
 
-\defbeamertemplate*{block alerted begin}{jonaslight}
+\defbeamertemplate*{block alerted begin}{LightRound}
 {
   \par\vskip\medskipamount%
   \usebeamercolor{block alerted title}
@@ -162,7 +162,7 @@
     \usebeamercolor{block body}
 }
 
-\defbeamertemplate*{block alerted end}{jonaslight}
+\defbeamertemplate*{block alerted end}{LightRound}
 {
   \egroup;
   \usebeamercolor{block alerted title}
