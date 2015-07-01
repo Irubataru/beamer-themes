@@ -1,0 +1,236 @@
+\mode<presentation>
+
+\RequirePackage{xifthen}
+\RequirePackage{xparse}
+
+% ---------- %
+% Background %
+% ---------- %
+\setbeamertemplate{background}{
+  \begin{tikzpicture}
+  \useasboundingbox (0,0) rectangle(\the\paperwidth,\the\paperheight);
+  \usebeamercolor{palette base}
+  \draw[color=bg,thin,rounded corners = 1pt] ([shift={(.1,.1)}] current bounding box.south west)
+    rectangle ([shift={(-.1,-.1)}] current bounding box.north east);
+  \clip[rounded corners=1pt] ([shift={(.1,.1)}] current bounding box.south west)
+    rectangle ([shift={(-.1,-.1)}] current bounding box.north east);
+  \fill[color=bg] ([shift={(.1,.1)}] current bounding box.south west) -- +(.15,0) -- +(0,.15) -- cycle;
+  \fill[color=bg] ([shift={(-.1,.1)}] current bounding box.south east) -- +(-.15,0) -- +(0,.15) -- cycle;
+  \fill[color=bg] ([shift={(.1,-.1)}] current bounding box.north west) -- +(.15,0) -- +(0,-.15) -- cycle;
+  %\fill[color=bg] ([shift={(-.1,-.1)}] current bounding box.north east) -- +(-.4,0) -- +(0,-.4) -- cycle;
+
+  \fill[bg] ([shift={(0,-.75)}] current page.north east) -- ([shift={(-.75,0)}] current page.north east) -- +(-.25,0)
+    -- ([shift={(0,-1)}] current page.north east) -- cycle;
+    \fill[bg] ([shift={(0,-.35)}] current page.north east) -- ([shift={(-.35,0)}] current page.north east) -- +(-.25,0)
+      -- ([shift={(0,-.6)}] current page.north east) -- cycle;
+  \coordinate (midpoint) at ($ ([shift={(0,-.675)}] current page.north east) !.5! ([shift={(-.675,0)}] current page.north east) $);
+    \node[fill=white,rectangle,inner sep=0,minimum size=7pt] at (midpoint) {};
+    \node[draw=bg,thin,rectangle,inner sep=0,minimum size=4.5pt] at (midpoint) {};
+    \node[fill=bg,thin,rectangle,inner sep=0,minimum size=1pt] at (midpoint) {};
+  \end{tikzpicture}
+}
+
+% ---------- %
+% Title page %
+% ---------- %
+\defbeamertemplate*{title page}{LightSquare}[1][]
+{ 
+  \begin{tikzpicture}[overlay,remember picture]
+    \clip ([shift={(.1,.1)}] current page.south west) rectangle ([shift={(-.1,-.1)}] current page.north east);
+    \fill[white] (current page.north east) rectangle +(-2,-2);
+    \usebeamercolor{palette base}
+    \draw[color=bg,rounded corners = 1pt] ([shift={(-2.1,-.1)}] current page.north east) -- ++(2,0) -- +(0,-2);
+    \fill[color=bg] ([shift={(-.1,-.1)}] current page.north east) -- +(-.15,0) -- +(0,-.15) -- cycle;
+    \fill[bg] ([shift={(0,-3)}] current page.north west) -- ([shift={(3,0)}] current page.north west) -- +(2,0)
+      -- ([shift={(0,-5)}] current page.north west) -- cycle;
+    \fill[bg] ([shift={(0,-5.5)}] current page.north west) -- ([shift={(5.5,0)}] current page.north west) -- +(2,0)
+      -- ([shift={(0,-7.5)}] current page.north west) -- cycle;
+      \coordinate (midpoint) at ($ ([shift={(0,-5.25)}] current page.north west) !.5! ([shift={(5.25,0)}] current page.north west) $);
+    \node[fill=white,rectangle,inner sep=0,minimum size=1cm] at (midpoint) {};
+    \node[fill=bg,rectangle,inner sep=0,minimum size=.7cm] at (midpoint) {};
+    \node[fill=white,rectangle,inner sep=0,minimum size=.65cm] at (midpoint) {};
+    \node[fill=bg,thin,rectangle,inner sep=0,minimum size=.1cm] at (midpoint) {};
+
+    \coordinate (title corner) at ([shift={(-2em,-2)}] current page.east);
+    \usebeamercolor{title page header}
+    \ifx\insertsubtitle\@empty%
+    % Insert title
+    {
+      \node[text=fg,anchor=south east,align=right,text width=10cm] at (title corner) {%
+        \usebeamerfont{title}\inserttitle%
+      };}
+    \else%
+    % Insert subtitle, if one exists, doesn't work with overflow
+    {
+      \node[text=fg,anchor=south east,align=right,text width=10cm] at ([yshift=1em]title corner) {%
+        \usebeamerfont{title}\inserttitle \\[5pt]
+        \usebeamerfont{subtitle}\insertsubtitle
+      };}
+    \fi%
+
+    %Insert date
+    \usebeamercolor{date}
+    \node[text=fg,anchor=south east] (datenode) at ([shift={(-2em, 1em)}] current page.south east) {%
+      \usebeamerfont{date}\insertdate
+    };
+
+    \usebeamercolor{author}
+    \node[text=fg,anchor=south east,align=right] at (datenode.north east) (author) {%
+      \usebeamerfont{author}\insertauthor%
+      };
+
+    \ifx\insertinstitute\@empty%
+    \else%
+    \usebeamercolor{institute}
+    \node[text=fg,anchor=south west,align=left] (institutenode) at ([shift={(1em, 1em)}] current page.south west) {%
+      \usebeamerfont{institute}\insertinstitute%
+      };
+    \fi%
+      
+  \end{tikzpicture}
+}
+
+% ------ %
+% blocks %
+% ------ %
+\defbeamertemplate*{block begin}{LightSquare}
+{
+  \par\vskip\medskipamount%
+  \usebeamercolor{block title}
+  \ifx\insertblocktitle\@empty\newcommand{\yskiplength}{1.5ex}
+  \else\newcommand{\yskiplength}{2ex}
+  \fi
+  \begin{tikzpicture}
+    \node [
+      draw=fg,
+      inner sep = 1ex,
+      inner ysep = \yskiplength,
+      text width=\paperwidth - 2cm - 5ex, 
+      minimum width=\paperwidth - 2cm - 1ex,
+      rounded corners=1pt
+    ] (BOXCONTENT) \bgroup%
+    \usebeamerfont{beamer body}
+    \usebeamercolor{block body}
+    %\ifx\insertblocktitle\@empty%
+    %\else\vphantom{\vbox to 1.2em {\vfill}}%
+    %\fi
+}
+
+\defbeamertemplate*{block end}{LightSquare}
+{
+  \egroup;
+  \usebeamercolor{block title}
+  \ifx\insertblocktitle\@empty
+  \else%
+  {
+    \node[
+      fill=bg,
+      anchor=west,
+      text=fg,
+      inner ysep = 0pt,
+      rounded corners
+    ] at ([shift={(5pt,0)}]BOXCONTENT.north west) {\insertblocktitle};
+  }
+  \fi
+  \clip[rounded corners = 1pt] (BOXCONTENT.south west) rectangle (BOXCONTENT.north east);
+  \fill[fg] (BOXCONTENT.south west) -- +(.1,0) -- +(0,.1);
+  \fill[fg] (BOXCONTENT.south east) -- +(-.1,0) -- +(0,.1);
+  \fill[fg] (BOXCONTENT.north west) -- +(.1,0) -- +(0,-.1);
+  \fill[fg] (BOXCONTENT.north east) -- +(-.1,0) -- +(0,-.1);
+  \node[inner sep=0, minimum size=1pt, fill=fg, rectangle] at ([shift={(225:.12)}] BOXCONTENT.north east) {};
+  \end{tikzpicture}
+  \vskip\smallskipamount
+}
+
+\defbeamertemplate*{block alerted begin}{LightSquare}
+{
+  \par\vskip\medskipamount%
+  \usebeamercolor{block alerted title}
+  \ifx\insertblocktitle\@empty\newcommand{\yskiplength}{1.5ex}
+  \else\newcommand{\yskiplength}{2ex}
+  \fi
+  \begin{tikzpicture}
+    \node [
+      draw=fg,
+      inner sep = 1ex,
+      inner ysep = \yskiplength,
+      text width=\paperwidth - 2cm - 5ex, 
+      minimum width=\paperwidth - 2cm - 1ex,
+      rounded corners=1pt
+    ] (BOXCONTENT) \bgroup%
+    \usebeamerfont{beamer body}
+    \usebeamercolor{block body}
+}
+
+\defbeamertemplate*{block alerted end}{LightSquare}
+{
+  \egroup;
+  \usebeamercolor{block alerted title}
+  \ifx\insertblocktitle\@empty
+  \else%
+  {
+    \node[
+      fill=bg,
+      anchor=west,
+      text=fg,
+      inner ysep = 0pt,
+      rounded corners
+    ] at ([shift={(5pt,0)}]BOXCONTENT.north west) {\insertblocktitle};
+  }
+  \fi
+  \clip[rounded corners = 1pt] (BOXCONTENT.south west) rectangle (BOXCONTENT.north east);
+  \fill[fg] (BOXCONTENT.south west) -- +(.1,0) -- +(0,.1);
+  \fill[fg] (BOXCONTENT.south east) -- +(-.1,0) -- +(0,.1);
+  \fill[fg] (BOXCONTENT.north west) -- +(.1,0) -- +(0,-.1);
+  \fill[fg] (BOXCONTENT.north east) -- +(-.1,0) -- +(0,-.1);
+  \node[inner sep=0, minimum size=1pt, fill=fg, rectangle] at ([shift={(225:.12)}] BOXCONTENT.north east) {};
+  \end{tikzpicture}
+  \vskip\smallskipamount
+}
+
+\NewDocumentEnvironment{grayblock}{m}%
+{
+  \par\vskip\medskipamount%
+  \usebeamercolor{palette primary}
+  \ifx\insertblocktitle\@empty\newcommand{\yskiplength}{1.5ex}
+  \else\newcommand{\yskiplength}{2ex}
+  \fi
+  \begin{tikzpicture}
+    \node [
+      draw=bg,
+      inner sep = 1ex,
+      inner ysep = \yskiplength,
+      text width=\paperwidth - 2cm - 5ex, 
+      minimum width=\paperwidth - 2cm - 1ex,
+      rounded corners=1pt
+    ] (BOXCONTENT) \bgroup%
+    \usebeamerfont{beamer body}
+    \usebeamercolor{block body}
+    \ifthenelse{\isempty{#1}}%
+    {}%
+    {\vspace*{3pt}}
+}{
+  \egroup;
+  \usebeamercolor{palette primary}
+  \ifthenelse{\isempty{#1}}%
+  {}%
+  {
+    \node [
+      fill=fg,
+      anchor=west,
+      text=bg,
+      inner ysep = 0pt,
+      rounded corners = 0pt
+    ] at ([shift={(5pt,0)}]BOXCONTENT.north west) {#1};}
+    \clip[rounded corners = 1pt] (BOXCONTENT.south west) rectangle (BOXCONTENT.north east);
+    \fill[bg] (BOXCONTENT.south west) -- +(.1,0) -- +(0,.1);
+    \fill[bg] (BOXCONTENT.south east) -- +(-.1,0) -- +(0,.1);
+    \fill[bg] (BOXCONTENT.north west) -- +(.1,0) -- +(0,-.1);
+    \fill[bg] (BOXCONTENT.north east) -- +(-.1,0) -- +(0,-.1);
+    \node[inner sep=0, minimum size=1pt, fill=bg, rectangle] at ([shift={(225:.12)}] BOXCONTENT.north east) {};
+  \end{tikzpicture}
+  \vskip\smallskipamount
+}
+
+\mode
+<all>
