@@ -61,7 +61,7 @@ Screenshots:
   </tr>
 </table>
 
-# "jonaslight"
+# "LightRound"
 My theme for the Lattice Conference 2015. It has some simple geometric shapes and matching boxes.
 
 The colour theme I got from here (slightly modified)
@@ -88,6 +88,9 @@ Screenshots:
     </td>
   </tr>
 </table>
+
+# "LightSquare"
+Basically the same as LightRound, but with all the circles replaced with rectangles. Screenshots might follow.
 
 # Installation
 
