@@ -108,11 +108,8 @@
       minimum width=\paperwidth - 2cm - 1ex,
       rounded corners=1pt
     ] (BOXCONTENT) \bgroup%
-    \usebeamerfont{beamer body}
-    \usebeamercolor{block body}
-    %\ifx\insertblocktitle\@empty%
-    %\else\vphantom{\vbox to 1.2em {\vfill}}%
-    %\fi
+    \usebeamerfont{beamer body}%
+    \usebeamercolor{block body}%
 }
 
 \defbeamertemplate*{block end}{LightRound}
@@ -144,11 +141,11 @@
 
 \defbeamertemplate*{block alerted begin}{LightRound}
 {
-  \par\vskip\medskipamount%
-  \usebeamercolor{block alerted title}
-  \ifx\insertblocktitle\@empty\newcommand{\yskiplength}{1.5ex}
-  \else\newcommand{\yskiplength}{2ex}
-  \fi
+  \par\vskip\medskipamount
+  \usebeamercolor{block alerted title}%
+  \ifx\insertblocktitle\@empty\newcommand{\yskiplength}{1.5ex}%
+  \else\newcommand{\yskiplength}{2ex}%
+  \fi%
   \begin{tikzpicture}
     \node [
       draw=fg,
@@ -158,8 +155,7 @@
       minimum width=\paperwidth - 2cm - 1ex,
       rounded corners=1pt
     ] (BOXCONTENT) \bgroup%
-    \usebeamerfont{beamer body}
-    \usebeamercolor{block body}
+    \usebeamerfont{beamer body}\usebeamercolor{block body}%
 }
 
 \defbeamertemplate*{block alerted end}{LightRound}
@@ -183,7 +179,6 @@
   \fill[fg] (BOXCONTENT.south east) -- +(-.1,0) -- +(0,.1);
   \fill[fg] (BOXCONTENT.north west) -- +(.1,0) -- +(0,-.1);
   \fill[fg] (BOXCONTENT.north east) -- +(-.1,0) -- +(0,-.1);
-  %\node[inner sep=0, minimum size=3pt, draw=fg, circle] at ([shift={(225:.15)}] BOXCONTENT.north east) {};
   \node[inner sep=0, minimum size=1pt, fill=fg, circle] at ([shift={(225:.12)}] BOXCONTENT.north east) {};
   \end{tikzpicture}
   \vskip\smallskipamount
@@ -193,9 +188,9 @@
 {
   \par\vskip\medskipamount%
   \usebeamercolor{palette primary}
-  \ifx\insertblocktitle\@empty\newcommand{\yskiplength}{1.5ex}
-  \else\newcommand{\yskiplength}{2ex}
-  \fi
+  \ifthenelse{\isempty{#1}}%
+  {\newcommand{\yskiplength}{1.5ex}}%
+  {\newcommand{\yskiplength}{1.5ex}}
   \begin{tikzpicture}
     \node [
       draw=bg,
@@ -205,11 +200,8 @@
       minimum width=\paperwidth - 2cm - 1ex,
       rounded corners=1pt
     ] (BOXCONTENT) \bgroup%
-    \usebeamerfont{beamer body}
-    \usebeamercolor{block body}
-    \ifthenelse{\isempty{#1}}%
-    {}%
-    {\vspace*{3pt}}
+    \usebeamerfont{beamer body}%
+    \usebeamercolor{block body}%
 }{
   \egroup;
   \usebeamercolor{palette primary}
@@ -228,7 +220,6 @@
     \fill[bg] (BOXCONTENT.south east) -- +(-.1,0) -- +(0,.1);
     \fill[bg] (BOXCONTENT.north west) -- +(.1,0) -- +(0,-.1);
     \fill[bg] (BOXCONTENT.north east) -- +(-.1,0) -- +(0,-.1);
-    %\node[inner sep=0, minimum size=3pt, draw=fg, circle] at ([shift={(225:.15)}] BOXCONTENT.north east) {};
     \node[inner sep=0, minimum size=1pt, fill=bg, circle] at ([shift={(225:.12)}] BOXCONTENT.north east) {};
   \end{tikzpicture}
   \vskip\smallskipamount
