@@ -6,7 +6,8 @@
 % ---------- %
 % Background %
 % ---------- %
-\setbeamertemplate{background}{
+\setbeamertemplate{background}
+{
   \begin{tikzpicture}
   \useasboundingbox (0,0) rectangle(\the\paperwidth,\the\paperheight);
   \usebeamercolor{palette base}
@@ -56,7 +57,7 @@
     % Insert title
     {
       \node[text=fg,anchor=south east,align=right,text width=10cm] at (title corner) {%
-        \usebeamerfont{title}\inserttitle%
+        \usebeamerfont{title}\parbox{8.5cm}{{\raggedleft \inserttitle\par}}%
       };}
     \else%
     % Insert subtitle, if one exists, doesn't work with overflow
