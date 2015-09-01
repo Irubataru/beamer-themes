@@ -5,6 +5,21 @@
 
 \setbeamertemplate{sections/subsections in toc}[square]
 \setbeamertemplate{items}[square]
+\setbeamertemplate{itemize item}{\raise1.5pt\hbox{\vrule width 1ex height 1ex}}
+\setbeamertemplate{enumerate item}
+{
+  \raise2.5pt%
+  \hbox{%
+    \usebeamerfont*{item projected}%
+    \usebeamercolor[bg]{item projected}%
+    \vrule width2.25ex height1.75ex depth.4ex%
+    \hskip-2.25ex%
+    \hbox to2.25ex{%
+      \hfil%
+      \color{fg}\insertenumlabel%
+      \hfil}%
+  }%
+}
 
 \defbeamertemplate*{title page}{CodeCourse}[1][]
 {
