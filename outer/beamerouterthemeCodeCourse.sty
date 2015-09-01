@@ -5,7 +5,7 @@
 {
   %\vskip5pt
   \ifx\insertframesubtitle\@empty%
-  \begin{beamercolorbox}[wd=\paperwidth,ht=1cm]{frametitle} 
+  \begin{beamercolorbox}[wd=\paperwidth,ht=1.4cm]{frametitle} 
   \else%
   \begin{beamercolorbox}[wd=\paperwidth,ht=1.6cm]{frametitle} 
   \fi
@@ -14,18 +14,6 @@
     \else%
       \\ \hskip1.3ex\usebeamercolor{framesubtitle} \usebeamerfont{framesubtitle} \strut{}\insertframesubtitle
     \fi
-  \end{beamercolorbox}
-}
-
-% Frame footer
-\defbeamertemplate*{footline}{LightTheme}
-{
-  \begin{beamercolorbox}[wd=\paperwidth,ht=3ex,dp=1ex]{frametitle}
-    \usebeamercolor{palette base}
-    \begin{tikzpicture}[overlay,remember picture]
-      \node[anchor=south east,text=bg] at ([shift={(-.2,.2)}] current page.south east) {
-      $\insertframenumber$/$\inserttotalframenumber$};
-    \end{tikzpicture}
   \end{beamercolorbox}
 }
 

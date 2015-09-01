@@ -6,6 +6,52 @@
 \setbeamertemplate{sections/subsections in toc}[square]
 \setbeamertemplate{items}[square]
 
+\defbeamertemplate*{title page}{CodeCourse}[1][]
+{
+  \begin{tikzpicture}[overlay,remember picture]
+    \fill[Tropiteal] (current page.south west) rectangle (current page.north east);
+  \end{tikzpicture}
+  \vbox{}
+  \vfill
+  \begingroup
+    \centering
+    \begin{beamercolorbox}[sep=8pt,center,#1]{title}
+      \usebeamerfont{title}\inserttitle\par%
+      \ifx\insertsubtitle\@empty%
+      \else%
+        \vskip0.25em%
+        {\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle\par}%
+      \fi%     
+    \end{beamercolorbox}%
+    \vskip1em\par
+    \begin{beamercolorbox}[sep=8pt,center,#1]{author}
+      \usebeamerfont{author}\insertauthor
+    \end{beamercolorbox}
+    \begin{beamercolorbox}[sep=8pt,center,#1]{institute}
+      \usebeamerfont{institute}\insertinstitute
+    \end{beamercolorbox}
+    \begin{beamercolorbox}[sep=8pt,center,#1]{date}
+      \usebeamerfont{date}\insertdate
+    \end{beamercolorbox}\vskip0.5em
+    {\usebeamercolor[fg]{titlegraphic}\inserttitlegraphic\par}
+  \endgroup
+  \vfill
+}
+
+\defbeamertemplate*{section page}{CodeCourse}[1][]
+{
+  \begin{tikzpicture}[overlay,remember picture]
+    \fill[TealDrop] (current page.south west) rectangle (current page.north east);
+  \end{tikzpicture}
+  \begingroup
+    \centering
+    \vskip1cm\par
+    \begin{beamercolorbox}[sep=12pt,center,#1]{section title}
+      \usebeamerfont{section title}\insertsection\par
+    \end{beamercolorbox}
+  \endgroup
+}
+
 % Block environments
 
 \NewDocumentEnvironment{quoteblock}{m o}%
