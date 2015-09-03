@@ -23,8 +23,9 @@
 
 \defbeamertemplate*{title page}{CodeCourse}[1][]
 {
+  \usebeamercolor{title page background canvas}
   \begin{tikzpicture}[overlay,remember picture]
-    \fill[Tropiteal] (current page.south west) rectangle (current page.north east);
+    \fill[bg] (current page.south west) rectangle (current page.north east);
   \end{tikzpicture}
   \vbox{}
   \vfill
@@ -55,8 +56,9 @@
 
 \defbeamertemplate*{section page}{CodeCourse}[1][]
 {
+  \usebeamercolor{section page background canvas}
   \begin{tikzpicture}[overlay,remember picture]
-    \fill[TealDrop] (current page.south west) rectangle (current page.north east);
+    \fill[bg] (current page.south west) rectangle (current page.north east);
   \end{tikzpicture}
   \begingroup
     \centering
