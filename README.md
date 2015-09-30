@@ -92,6 +92,40 @@ Screenshots:
 # "LightSquare"
 Basically the same as LightRound, but with all the circles replaced with rectangles. Screenshots might follow.
 
+# "CodeCourse"
+The theme I used for the [C++ course](https://github.com/Irubataru/cpp-lecture-2015) I gave in 2015.
+
+Font used for the examples: [Yanone Kaffeesatz Bold](http://www.yanone.de/typedesign/kaffeesatz/?key=typedesign/kaffeesatz)
+
+Colours: [fresh cut day](http://www.colourlovers.com/palette/46688/fresh_cut_day) and [marty](http://www.colourlovers.com/color/FA2A00/marty)
+
+<table>
+  <tr>
+    <td>
+      <img src="/../screenshots/screenshots/code.course/code.course-0.png?raw=true" alt="Title Page" width="250">
+    </td>
+    <td>
+      <img src="/../screenshots/screenshots/code.course/code.course-1.png?raw=true" alt="Items" width="250">
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <img src="/../screenshots/screenshots/code.course/code.course-2.png?raw=true" alt="Boxes1" width="250">
+    </td>
+    <td>
+      <img src="/../screenshots/screenshots/code.course/code.course-3.png?raw=true" alt="Boxes2" width="250">
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <img src="/../screenshots/screenshots/code.course/code.course-4.png?raw=true" alt="Boxes1" width="250">
+    </td>
+    <td>
+      <img src="/../screenshots/screenshots/code.course/code.course-5.png?raw=true" alt="Boxes2" width="250">
+    </td>
+  </tr>
+</table>
+
 # Installation
 
 Standard LaTeX installation, put the files somewhere LaTeX can find them. I normally put these in
