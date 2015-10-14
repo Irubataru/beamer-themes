@@ -3,19 +3,21 @@
 % Frame title
 \defbeamertemplate*{frametitle}{LightTheme}[1][]
 {
-  %\vskip5pt
-  \ifx\insertframesubtitle\@empty%
-  \begin{beamercolorbox}[wd=\paperwidth,ht=1cm]{frametitle} 
-  \else%
-  \begin{beamercolorbox}[wd=\paperwidth,ht=1.6cm]{frametitle} 
-  \fi
-    \hskip1ex\usebeamercolor{frametitle} \usebeamerfont{frametitle} \strut{}\insertframetitle
-    \ifx\insertframesubtitle\@empty%
-    \else%
-      \\ \hskip1.3ex\usebeamercolor{framesubtitle} \usebeamerfont{framesubtitle} \strut{}\insertframesubtitle
-    \fi
+  \begin{beamercolorbox}[sep=0.3cm,wd=0.92\paperwidth]{frametitle} 
+    \usebeamercolor{frametitle}%
+    \usebeamerfont{frametitle}%
+    \vbox{}\vskip-.5ex%
+    \strut\insertframetitle\strut\par%
+    {%
+      \ifx\insertframesubtitle\@empty%
+      \else%
+      {\vskip-.25ex\hskip.1ex\usebeamerfont{framesubtitle}\usebeamercolor[fg]{framesubtitle}\insertframesubtitle\strut\par}%
+      \fi
+    }%
+    \vskip-1ex%
   \end{beamercolorbox}
 }
+
 
 % Frame footer
 \defbeamertemplate*{footline}{LightTheme}

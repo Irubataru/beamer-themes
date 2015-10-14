@@ -109,12 +109,14 @@
       minimum width=\paperwidth - 2cm - 1ex,
       rounded corners=1pt
     ] (BOXCONTENT) \bgroup%
+    \begin{minipage}{\textwidth}
     \usebeamerfont{beamer body}%
     \usebeamercolor{block body}%
 }
 
 \defbeamertemplate*{block end}{LightRound}
 {
+  \end{minipage}%
   \egroup;
   \usebeamercolor{block title}
   \ifx\insertblocktitle\@empty
@@ -156,11 +158,14 @@
       minimum width=\paperwidth - 2cm - 1ex,
       rounded corners=1pt
     ] (BOXCONTENT) \bgroup%
-    \usebeamerfont{beamer body}\usebeamercolor{block body}%
+    \begin{minipage}{\textwidth}
+    \usebeamerfont{beamer body}%
+    \usebeamercolor{block body}%
 }
 
 \defbeamertemplate*{block alerted end}{LightRound}
 {
+  \end{minipage}%
   \egroup;
   \usebeamercolor{block alerted title}
   \ifx\insertblocktitle\@empty
@@ -201,9 +206,11 @@
       minimum width=\paperwidth - 2cm - 1ex,
       rounded corners=1pt
     ] (BOXCONTENT) \bgroup%
+    \begin{minipage}{\textwidth}
     \usebeamerfont{beamer body}%
     \usebeamercolor{block body}%
 }{
+  \end{minipage}%
   \egroup;
   \usebeamercolor{palette primary}
   \ifthenelse{\isempty{#1}}%
