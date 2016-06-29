@@ -112,19 +112,26 @@
 {
   \par\vskip\medskipamount%
   \usebeamercolor{block title}
+  \ifx\insertblocktitle\@empty\newcommand{\yskiplength}{1.5ex}
+  \else\newcommand{\yskiplength}{2ex}
+  \fi
   \begin{tikzpicture}
     \node [
-      draw=fg, inner sep=2ex, 
+      draw=fg,
+      inner sep = 1ex,
+      inner ysep = \yskiplength,
       text width=\paperwidth - 2cm - 5ex, 
       minimum width=\paperwidth - 2cm - 1ex,
-      rounded corners
+      rounded corners=1pt
     ] (BOXCONTENT) \bgroup%
-    \usebeamerfont{beamer body}
-    \usebeamercolor{block body}
+    \begin{minipage}{\textwidth}
+    \usebeamerfont{beamer body}%
+    \usebeamercolor{block body}%
 }
 
 \defbeamertemplate*{block end}{CodeCourse}
 {
+  \end{minipage}%
   \egroup;
   \usebeamercolor{block title}
   \ifx\insertblocktitle\@empty

@@ -21,13 +21,13 @@
 % Frame footer
 \defbeamertemplate*{footline}{CodeCourse}
 {
-  \begin{beamercolorbox}[wd=\paperwidth,ht=3ex,dp=1ex]{frametitle}
+  \leavevmode%
+  \hbox{%
+  \begin{beamercolorbox}[wd=\paperwidth,ht=2.5ex,dp=1ex]{frametitle}
     \usebeamercolor{palette base}
-    \begin{tikzpicture}[overlay,remember picture]
-      \node[anchor=south west,text=bg] at ([shift={(.2,.2)}] current page.south west) {
-      $\insertframenumber$/$\inserttotalframenumber$};
-    \end{tikzpicture}
-  \end{beamercolorbox}
+    \hskip 2.5ex\strut{}\insertframenumber / \strut{}\inserttotalframenumber\vskip .5ex
+  \end{beamercolorbox}%
+  }
 }
 
 
