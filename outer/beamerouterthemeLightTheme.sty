@@ -1,34 +1,89 @@
-\mode<presentation>
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{beamerouterthemeLightTheme}
+\RequirePackage{etoolbox}
+\RequirePackage{calc}
+\RequirePackage{pgfopts}
+
+\pgfkeys{
+  /LightTheme/outer/numbering/.cd,
+    .is choice,
+    none/.code=\setbeamertemplate{frame numbering}[none],
+    counter/.code=\setbeamertemplate{frame numbering}[counter],
+    fraction/.code=\setbeamertemplate{frame numbering}[fraction],
+}
+\newcommand{\LightTheme@outer@setdefaults}{
+  \pgfkeys{/LightTheme/outer/.cd,
+    numbering=counter,
+  }
+}
 
 % Frame title
-\defbeamertemplate*{frametitle}{LightTheme}[1][]
-{
-  \begin{beamercolorbox}[sep=0.3cm,wd=0.92\paperwidth]{frametitle} 
-    \usebeamercolor{frametitle}%
-    \usebeamerfont{frametitle}%
-    \vbox{}\vskip-.5ex%
-    \strut\insertframetitle\strut\par%
-    {%
-      \ifx\insertframesubtitle\@empty%
-      \else%
-      {\vskip-.25ex\hskip.1ex\usebeamerfont{framesubtitle}\usebeamercolor[fg]{framesubtitle}\insertframesubtitle\strut\par}%
-      \fi
+\newlength{\LightTheme@frametitle@padding}
+\setlength{\LightTheme@frametitle@padding}{2.2ex}
+\newcommand{\LightTheme@frametitlestrut@start}{
+  \rule{0pt}{\LightTheme@frametitle@padding +%
+    \totalheightof{%
+      \ifcsdef{LightTheme@frametitleformat}{\LightTheme@frametitleformat X}{X}%
     }%
-    \vskip-1ex%
+  }%
+}
+\newcommand{\LightTheme@frametitlestrut@end}{
+  \rule[-\LightTheme@frametitle@padding]{0pt}{\LightTheme@frametitle@padding}
+}
+\defbeamertemplate{frametitle}{LightTheme}{%
+  \nointerlineskip%
+  \begin{beamercolorbox}[%
+      wd=\paperwidth,%
+      sep=0pt,%
+      leftskip=2\LightTheme@frametitle@padding,%
+      rightskip=\LightTheme@frametitle@padding,%
+    ]{frametitle}%
+  \LightTheme@frametitlestrut@start%
+  \insertframetitle%
+  \nolinebreak%
+  \LightTheme@frametitlestrut@end%
+  {%
+    \ifx\insertframesubtitle\@empty%
+    \else%
+    {%
+      \vskip-.5ex\hskip.1ex%
+      \usebeamerfont{framesubtitle}%
+      \usebeamercolor[fg]{framesubtitle}%
+      \insertframesubtitle%
+      \strut\par%
+    }%
+    \fi
+  }%
   \end{beamercolorbox}
 }
 
+% Frame numbering
+\defbeamertemplate{frame numbering}{none}{}
+\defbeamertemplate{frame numbering}{counter}{\insertframenumber}
+\defbeamertemplate{frame numbering}{fraction}{
+    \insertframenumber/\inserttotalframenumber
+  }
 
 % Frame footer
-\defbeamertemplate*{footline}{LightTheme}
-{
-  \begin{beamercolorbox}[wd=\paperwidth,ht=3ex,dp=1ex]{frametitle}
-    \usebeamercolor{palette base}
-    \begin{tikzpicture}[overlay,remember picture]
-      \node[anchor=south east,text=bg] at ([shift={(-.2,.2)}] current page.south east) {
-      $\insertframenumber$/$\inserttotalframenumber$};
-    \end{tikzpicture}
-  \end{beamercolorbox}
+\defbeamertemplate{footline}{plain}{%
+  \begin{beamercolorbox}[wd=\textwidth, sep=3ex]{footline}%
+    \usebeamerfont{page number in head/foot}%
+    \usebeamertemplate*{frame footer}
+    \hfill%
+    \usebeamercolor{frame numbering}
+    \usebeamertemplate*{frame numbering}
+  \end{beamercolorbox}%
 }
 
-\mode<all>
+\setbeamertemplate{frametitle}[LightTheme]
+\setbeamertemplate{footline}[plain]
+
+\AtBeginDocument{%
+  \apptocmd{\appendix}{%
+    \pgfkeys{%
+      /LightTheme/outer/.cd,
+      numbering=none}
+    }{}{}
+}
+\LightTheme@outer@setdefaults
+\ProcessPgfPackageOptions{/LightTheme/outer}

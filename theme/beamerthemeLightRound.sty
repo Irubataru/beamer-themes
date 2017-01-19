@@ -1,7 +1,15 @@
-\mode<presentation>
-
 % Requirement
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{beamerthememeLightRoound}
+\RequirePackage{etoolbox}
 \RequirePackage{tikz}
+\RequirePackage{pgfopts}
+
+\pgfkeys{/LightTheme/.cd,
+  .search also={
+    /LightTheme/outer,
+  }
+}
 \usetikzlibrary{positioning,calc}
 
 % Settings
@@ -10,7 +18,6 @@
 \usecolortheme{LightTheme}
 \usefonttheme{LightTheme}
 
-
 \setbeamertemplate{navigation symbols}{}
 
 % Items
@@ -18,4 +25,13 @@
 \setbeamertemplate{itemize items}[circle]
 \setbeamertemplate{sections/subsections in toc}[square]
 
-\mode<all>
+\pgfkeys{/LightTheme/.cd,
+  noslidenumbers/.code=\pgfkeysalso{outer/numbering=none},
+}
+
+\AtEndPreamble{%
+  \@ifpackageloaded{pgfplots}{%
+    \RequirePackage{pgfplotsthemetol}
+  }{}
+}
+\ProcessPgfOptions{/LightTheme}
