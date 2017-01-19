@@ -2,50 +2,67 @@
 
 % Requirement
 \RequirePackage{xcolor}
-
-% Colours
-\definecolor{lightlightblue}{RGB}{128,178,242}
-\definecolor{lightlightcyan}{RGB}{73,166,166}
-\definecolor{lightlightgreen}{RGB}{184,191,132}
-\definecolor{lightlightorange}{RGB}{191,114,86}
-\definecolor{lightlightred}{RGB}{191,42,42}
+\ProvidesPackage{beamercolorthemeLightTheme}
 
 % Colours
 \definecolor{LightUIBase}{RGB}{44,62,80}
 \definecolor{LightUIRed}{RGB}{231,76,60}
 \definecolor{LightUIGray}{RGB}{236,240,241}
-%\definecolor{LightUILightBlue}{RGB}{52,152,219}
 \definecolor{LightUILightBlue}{RGB}{72,172,239}
 \definecolor{LightUIBlue}{RGB}{41,128,185}
 
-% Settings
-\setbeamercolor*{title page header}{fg=LightUIBase}
-\setbeamercolor*{author}{fg=LightUIBase}
-\setbeamercolor*{date}{fg=LightUIBase}
-\setbeamercolor*{header text}{fg=black}
-\setbeamercolor*{normal text}{fg=LightUIBase}
-\setbeamercolor*{frametitle}{fg=LightUIRed}
-%\setbeamercolor*{frametitle}{fg=LightUIBase}
+% The various palettes
+\setbeamercolor{palette base}{fg=LightUIBase, bg=LightUIBase}
+\setbeamercolor{palette primary}{fg=LightUILightBlue, bg=LightUILightBlue}
+\setbeamercolor{palette secondary}{fg=LightUIRed, bg=LightUIRed}
+\setbeamercolor{palette tertiary}{bg=LightUIBlue, bg=LightUIBlue}
 
-% For the boxes
-%\setbeamercolor*{palette base}{bg=lightlightblue}
-\setbeamercolor*{palette base}{bg=LightUILightBlue}
-\setbeamercolor*{palette primary}{bg=LightUIBase,fg=white}
-\setbeamercolor*{palette secondary}{bg=LightUIRed,fg=white}
-\setbeamercolor*{palette tertiary}{bg=LightUIBlue,fg=white}
+\setbeamercolor*{background}{bg=white}
 
+% Text and headings
+\setbeamercolor{normal text}{
+  use={palette base,background},
+  fg=palette base.fg,
+  bg=background.bg
+}
+
+\setbeamercolor{title page header}{use=normal text, parent=normal text}
+\setbeamercolor{author}{use=normal text, parent=normal text}
+\setbeamercolor{date}{use=normal text, parent=normal text}
+\setbeamercolor{header text}{use=normal text, fg=normal text}
+
+\setbeamercolor{alerted text}{use=palette secondary, fg=palette secondary.fg}
+\setbeamercolor{frametitle}{use=alerted text, parent=alerted text}
+\setbeamercolor{framesubtitle}{use=frametitle, parent=frametitle}
 
 % For the blocks
-%\setbeamercolor*{block title}{fg=lightlightblue}
-\setbeamercolor*{block title}{fg=LightUILightBlue,bg=white}
-\setbeamercolor*{block alerted title}{fg=LightUIRed}
+\setbeamercolor{block title}{
+  use={palette tertiary,normal text},
+  fg=palette tertiary.fg,
+  bg=normal text.bg
+}
+
+\setbeamercolor{block body}{
+  use={block title,normal text},
+  fg=normal text.fg,
+  bg=block title.bg
+}
+
+\setbeamercolor{block alerted title}{
+  use={palette secondary, normal text},
+  fg=palette secondary.fg,
+  bg=normal text.bg
+}
+
+\setbeamercolor{block alerted body}{
+  use={block alerted body, normal text},
+  fg=normal text.fg,
+  bg=block alerted body.bg
+}
 
 % Items
-\setbeamercolor*{item}{fg=LightUIRed}
-\setbeamercolor*{alerted text}{fg=LightUIRed}
-\setbeamercolor{section in toc}{fg=LightUILightBlue}
-%\setbeamercolor{section in toc}{fg=lightlightblue}
-
+\setbeamercolor{item}{use=palette secondary, fg=palette secondary.fg}
+\setbeamercolor{section in toc}{use=palette primary, fg=palette primary.fg}
 
 \mode
 <all>
