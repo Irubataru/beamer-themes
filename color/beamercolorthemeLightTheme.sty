@@ -1,5 +1,3 @@
-\mode<presentation>
-
 % Requirement
 \RequirePackage{xcolor}
 \ProvidesPackage{beamercolorthemeLightTheme}
@@ -15,7 +13,7 @@
 \setbeamercolor{palette base}{fg=LightUIBase, bg=LightUIBase}
 \setbeamercolor{palette primary}{fg=LightUILightBlue, bg=LightUILightBlue}
 \setbeamercolor{palette secondary}{fg=LightUIRed, bg=LightUIRed}
-\setbeamercolor{palette tertiary}{bg=LightUIBlue, bg=LightUIBlue}
+\setbeamercolor{palette tertiary}{fg=LightUIBlue, bg=LightUIBlue}
 
 \setbeamercolor*{background}{bg=white}
 
@@ -50,11 +48,7 @@
   bg=normal text.bg
 }
 
-\setbeamercolor{block body}{
-  use={block title,normal text},
-  fg=normal text.fg,
-  bg=block title.bg
-}
+\setbeamercolor{block body}{use=normal text, parent=normal text}
 
 \setbeamercolor{block alerted title}{
   use={palette secondary, normal text},
@@ -62,15 +56,16 @@
   bg=normal text.bg
 }
 
-\setbeamercolor{block alerted body}{
-  use={block alerted body, normal text},
-  fg=normal text.fg,
-  bg=block alerted body.bg
+\setbeamercolor{block alerted body}{use=normal text, parent=normal text}
+
+\setbeamercolor{block grey title}{
+  use={palette base, normal text},
+  fg=palette base.fg,
+  bg=normal text.bg
 }
+
+\setbeamercolor{block grey body}{use=normal text, parent=normal text}
 
 % Items
 \setbeamercolor{item}{use=palette secondary, fg=palette secondary.fg}
 \setbeamercolor{section in toc}{use=palette primary, fg=palette primary.fg}
-
-\mode
-<all>
