@@ -34,13 +34,11 @@
       \usebeamercolor{author}
       \ifx\insertauthor\@empty%
       \else%
-      {\node[anchor=west,color=fg,font=\tiny] (author) at (3.2,1.5ex) {\insertauthor};
-        \ifx\insertshortinstitute\@empty%
-        \else%
-        {\node[anchor=west,color=fg,font=\tiny, right=0.25em of author] {(\insertshortinstitute)};}}%
-        \fi
+      {%
+        \node[anchor=west,color=fg,font=\tiny] (author) at (3.2,1.5ex) {\insertauthor};%
+      }%
       \fi
-      \node[anchor=east,color=fg, font=\tiny] at(\the\paperwidth - 0.3, 1.5ex) {$\insertframenumber$/$\inserttotalframenumber$};
+      \node[anchor=east,color=fg, font=\tiny] at(\the\paperwidth - 0.5, 1.5ex) {$\insertframenumber$/$\inserttotalframenumber$};
     \end{tikzpicture}
   \end{beamercolorbox}
 }

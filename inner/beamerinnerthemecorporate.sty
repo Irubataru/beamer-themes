@@ -40,27 +40,10 @@
     % Insert author
     \coordinate (info corner) at ([shift={(3.05,2.9)}]current page.south west);
     \usebeamercolor{author}
-    \node[text=fg,anchor=north west,align=left] at ([shift={(.5em,-.5em)}]info corner) (author) {%
-      \usebeamerfont{author}\insertauthor%
-        % Insert institute, if it has been given
-        \ifx\insertinstitute\@empty%
-        \else%
-         {\usebeamerfont{institute}\hskip1em-\hskip0.25em\insertinstitute}
-        \fi%
+    \node[text=fg,anchor=north west,align=left] at ([shift={(.5em,-.5em)}]info corner) (author) %
+      {%
+        \usebeamerfont{author}\insertauthor%
       };
-      
-      % Insert collaborator if given
-      %\ifx\insertcollaborator\@empty%
-      %\else%
-      %{\node[text=fg,anchor=north west, align=left] at ([shift={(.5cm,-.1em)}]author.south west) {%
-          %\usebeamerfont{institute} in collaboration with \insertcollaborator% 
-          %% Insert collaborator's institute if given
-          %\ifx\insertcollaboratorinst\@empty%
-          %\else%
-            %{\usebeamerfont{institute} \hskip0.25em (\insertcollaboratorinst)}
-          %\fi%
-        %};}
-      %\fi
 
       % Insert date
       \node[text=fg,anchor=south east] at ([shift={(-.5em,.5em)}]current page.south east) {\usebeamerfont{author}\insertdate};
