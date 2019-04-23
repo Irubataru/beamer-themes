@@ -1,30 +1,82 @@
-\mode<presentation>
-
 % Requirement
 \RequirePackage{xcolor}
+\ProvidesPackage{beamercolorthemecorporate}
 
-% Colours
+% -------------------- %
+% Colours and palettes %
+% -------------------- %
+
 \definecolor{heavybluecorp}{RGB}{48,66,105}
 \definecolor{lightbluecorp}{RGB}{145,190,212}
 \definecolor{lightgraycorp}{RGB}{217,232,255}
 \definecolor{orangecorp}{RGB}{242,97,1}
 \definecolor{graycorp}{RGB}{217,232,245}
 
-% Settings
-\setbeamercolor*{title page header}{fg=white}
-\setbeamercolor*{author}{fg=white}
-\setbeamercolor*{date}{fg=white}
-\setbeamercolor*{header text}{fg=white}
+\setbeamercolor*{background}{bg=white}
 
-% For the boxes
-\setbeamercolor*{palette base}{bg=heavybluecorp}
-\setbeamercolor*{palette primary}{bg=orangecorp,fg=white}
-\setbeamercolor*{palette secondary}{bg=lightbluecorp,fg=white}
-\setbeamercolor*{palette tertiary}{bg=graycorp,fg=white}
+% Translation into palettes
+\setbeamercolor{palette base}{fg=black, bg=black}
+\setbeamercolor{palette primary}{fg=lightbluecorp,bg=lightbluecorp}
+\setbeamercolor{palette secondary}{fg=orangecorp,bg=orangecorp}
+\setbeamercolor{palette tertiary}{fg=heavybluecorp, bg=heavybluecorp}
+\setbeamercolor{palette quatenary}{fg=graycorp,bg=graycorp}
 
-% Items
-\setbeamercolor*{item}{fg=orangecorp}
-\setbeamercolor*{alerted text}{fg=orangecorp}
+% ---------------- %
+% Text and headers %
+% ---------------- %
 
-\mode
-<all>
+\setbeamercolor{normal text}{
+  use={palette base,background},
+  fg=palette base.fg,
+  bg=background.bg
+}
+
+\setbeamercolor{title page header}{
+  use=background,
+  fg=background.bg
+}
+
+\setbeamercolor{author}{parent=title page header}
+\setbeamercolor{date}{parent=title page header}
+
+\setbeamercolor{header text}{
+  use=normal text,
+  fg=normal text.fg
+}
+
+\setbeamercolor{alerted text}{
+  use=palette secondary,
+  fg=palette secondary.fg
+}
+
+% Header text
+\setbeamercolor{frametitle}{
+  use=background, 
+  fg=background.bg
+}
+
+\setbeamercolor{framesubtitle}{parent=frametitle}
+
+% Footer text
+\setbeamercolor{footline}{parent=frametitle}
+\setbeamercolor{frame numbering}{parent=footline}
+
+% ------ %
+% Blocks %
+% ------ %
+
+\setbeamercolor{block title}{
+  use={palette primary,normal text},
+  fg=palette primary.fg,
+  bg=normal text.bg
+}
+
+\setbeamercolor{block body}{parent=normal text}
+
+\setbeamercolor{block alerted title}{
+  use={alerted text, normal text},
+  fg=alerted text.fg,
+  bg=normal text.bg
+}
+
+\setbeamercolor{block alerted body}{parent=normal text}
