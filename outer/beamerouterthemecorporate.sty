@@ -1,69 +1,138 @@
+\NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{beamerouterthemecorporate}
+\RequirePackage{etoolbox}
+\RequirePackage{calc}
+\RequirePackage{pgfopts}
 
-% Frame title
+\pgfkeys{
+  /corporate/outer/numbering/.cd,
+    .is choice,
+    none/.code=\setbeamertemplate{frame numbering}[none],
+    counter/.code=\setbeamertemplate{frame numbering}[counter],
+    fraction/.code=\setbeamertemplate{frame numbering}[fraction],
+}
+
+\newcommand{\corporate@outer@setdefaults}{
+  \pgfkeys{/corporate/outer/.cd,
+    numbering=fraction,
+  }
+}
+
+% ----------- %
+% Frame title %
+% ----------- %
+
+\newlength{\corporate@frametitle@bandheight}
+\setlength{\corporate@frametitle@bandheight}{1.5cm}
+
 \defbeamertemplate*{frametitle}{corporate}[1][]
 {
-  \vskip1cm%
-  \begin{beamercolorbox}[wd=\paperwidth,ht=.1cm]{frametitle} 
+  \vskip.2cm%
+  \begin{beamercolorbox}[wd=\paperwidth]{frametitle} 
     \begin{tikzpicture}
-      \useasboundingbox (0,0) rectangle(\the\paperwidth,1.2);
+      \useasboundingbox (0,0) rectangle(\the\paperwidth,\corporate@frametitle@bandheight);
 
       \usebeamercolor{palette secondary}
-      \fill[bg] (0,0) rectangle(2.95,1.2);
+      \fill[bg] (0,0) rectangle (%
+        \corporate@separationposition - 0.5\corporate@separationwidth,%
+        \corporate@frametitle@bandheight);
 
       \usebeamercolor{palette primary}
-      \fill[bg] (3.05,0) rectangle(\the\paperwidth,1.2);
+      \fill[bg] (%
+        \corporate@separationposition + 0.5\corporate@separationwidth,%
+        0) rectangle (%
+        \the\paperwidth,%
+        \corporate@frametitle@bandheight);
 
-      \ifx\insertframesubtitle\@empty%
-        {
-          \usebeamercolor{frametitle}
-          \node[
-            anchor=west,
-            color=fg,
-            font=\usebeamerfont{frametitle}
-          ] at (3.2,0.61) {\insertframetitle};
-        }
-      \else%
-        {
-          \usebeamercolor{frametitle}
-          \node[
-            anchor= west,
-            color=fg,
-            font=\usebeamerfont{frametitle}
-          ] at (3.2,0.81) {\insertframetitle};
-
-          \node[
-            anchor= west,
-            color=fg,
-            font=\usebeamerfont{framesubtitle}
-          ] at (3.3,0.41) {$\hookrightarrow$\hskip3pt\insertframesubtitle};
-        }
-      \fi
+      \usebeamercolor{frametitle}
+      \node[anchor=west] at (%
+        \corporate@separationposition + 0.5\corporate@separationwidth + 0.15cm,%
+        0.5\corporate@frametitle@bandheight) {
+          \begin{minipage}{\textwidth}
+            \color{fg}\usebeamerfont{frametitle}\insertframetitle
+            \ifx\insertframesubtitle\@empty%
+            \else%
+            \color{fg}\usebeamerfont{framesubtitle}\\\hspace*{2mm}$\hookrightarrow$\hspace{3pt}\insertframesubtitle
+            \fi
+          \end{minipage}
+        };
     \end{tikzpicture}
   \end{beamercolorbox}
 }
 
+% -------- %
+% Footline %
+% -------- %
+
+% Frame numbering
+\defbeamertemplate{frame numbering}{none}{}
+\defbeamertemplate{frame numbering}{counter}{\insertframenumber}
+\defbeamertemplate{frame numbering}{fraction}{%
+  \insertframenumber/\inserttotalframenumber
+}
+
+\newlength{\corporate@footline@padding}
+\setlength{\corporate@footline@padding}{2.5pt}
+
+\newcommand{\corporate@footline@strut@begin}{
+  \rule{0pt}{\corporate@footline@padding +%
+    \totalheightof{%
+      \ifcsdef{corporate@footlineformat}{\corporate@footlineformat X}{X}%
+    }%
+  }%
+}
+
+\newcommand{\corporate@footline@strut@end}{
+  \rule[-\corporate@footline@padding]{0pt}{\corporate@footline@padding}
+}
+
 \defbeamertemplate*{footline}{corporate}
 {
-  \begin{beamercolorbox}[wd=\paperwidth,ht=3ex,dp=1ex]{frametitle}
+  \begin{beamercolorbox}[wd=\paperwidth,dp=1ex]{frametitle}
     \begin{tikzpicture}
-      \useasboundingbox (0,0) rectangle (\the\paperwidth,2.25ex);
+
+      \node[inner sep=0pt] (footer-box) at (0.5*\the\paperwidth, 0) {%
+        \corporate@footline@strut@begin%
+        \corporate@footline@strut@end%
+      };
+
+      \coordinate (bounding-lower) at (footer-box.south);
+      \coordinate (bounding-upper) at (footer-box.north);
+
+      \useasboundingbox let \p{lower}=(bounding-lower), \p{upper}=(bounding-upper) in
+        (0, \y{lower}) rectangle (\the\paperwidth, \y{upper});
 
       \usebeamercolor{palette secondary}
-      \fill[bg] (0,0) rectangle (2.95,3ex);
+      \fill[bg]  let \p{lower}=(bounding-lower), \p{upper}=(bounding-upper) in
+        (0, \y{lower}) rectangle (%
+          \corporate@separationposition - 0.5\corporate@separationwidth,%
+          \y{upper}%
+        );
 
       \usebeamercolor{palette primary}
-      \fill[bg] (3.05,0) rectangle(\the\paperwidth,3ex);
+      \fill[bg]  let \p{lower}=(bounding-lower), \p{upper}=(bounding-upper) in
+        (%
+          \corporate@separationposition + 0.5\corporate@separationwidth,% 
+          \y{lower}%
+        ) rectangle (\the\paperwidth, \y{upper});
 
       \ifx\insertshortauthor\@empty
       \else
         {
           \usebeamercolor{footline}
           \node[
+            inner sep=0pt,
             anchor=west,
-            color=fg,
+            text=fg,
             font=\usebeamerfont{footline}
-          ] (author) at (3.2,1.5ex) {\insertshortauthor\strut};%
+          ] (author) at (%
+            \corporate@separationposition + 0.5\corporate@separationwidth + 1.5mm,% 
+            0
+          ) {%
+            \corporate@footline@strut@begin%
+            \insertshortauthor%
+            \corporate@footline@strut@end%
+          };
         }
       \fi
 
@@ -72,22 +141,33 @@
         {
           \usebeamercolor{footline}
           \node[
+            inner sep=0pt,
             anchor=west,
-            color=fg,
-            anchor=south west,
+            text=fg,
             font=\usebeamerfont{footline}
-            ] (institute) at ([xshift=.1em] author.south east) {(\insertshortinstitute)\strut};%
+          ] (institute) at ([xshift=.1em] author.east) {%
+            \corporate@footline@strut@begin%
+            (\insertshortinstitute)%
+            \corporate@footline@strut@end%
+          };
         }
       \fi
 
       \usebeamercolor{frame numbering}
       \node[
+        inner sep=0pt,
         anchor=east,
-        color=fg,
-        font=\usebeamerfont{frame numbering}
-      ] at (\the\paperwidth - 0.5, 1.5ex)
-        {$\insertframenumber$/$\inserttotalframenumber$};
+        text=fg,
+        font=\usebeamerfont{footline}
+      ] (frame-number) at (\the\paperwidth - .5mm, 0) {%
+        \corporate@footline@strut@begin%
+        \usebeamertemplate*{frame numbering}%
+        \corporate@footline@strut@end%
+      };
 
     \end{tikzpicture}
   \end{beamercolorbox}
 }
+
+\corporate@outer@setdefaults
+\ProcessPgfPackageOptions{/corporate/outer}

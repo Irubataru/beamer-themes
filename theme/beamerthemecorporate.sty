@@ -1,8 +1,23 @@
-\mode<presentation>
-
 % Requirement
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{beamerthememecorporate}
 \RequirePackage{tikz}
-\usetikzlibrary{positioning}
+\RequirePackage{pgfopts}
+
+\pgfkeys{/corporate/.cd,
+  .search also={
+    /corporate/outer,
+  }
+}
+
+\usetikzlibrary{positioning, calc}
+
+% Some theme sizes
+\newlength{\corporate@separationposition}
+\setlength{\corporate@separationposition}{2cm}
+
+\newlength{\corporate@separationwidth}
+\setlength{\corporate@separationwidth}{1mm}
 
 % Settings
 \useinnertheme{corporate}
@@ -16,4 +31,8 @@
 \setbeamertemplate{items}[square]
 \setbeamertemplate{sections/subsections in toc}[square]
 
-\mode<all>
+\pgfkeys{/corporate/.cd,
+  noslidenumbers/.code=\pgfkeysalso{outer/numbering=none},
+}
+
+\ProcessPgfOptions{/corporate}

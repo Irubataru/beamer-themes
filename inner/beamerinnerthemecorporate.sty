@@ -40,16 +40,24 @@
 
     % Bottom left rectangle
     \usebeamercolor{palette secondary}
-    \fill[color=bg] (current page.south west) rectangle +(2.95cm,2.9cm);
+    \fill[color=bg]
+      (current page.south west) 
+      rectangle +(
+        \corporate@separationposition - 0.5\corporate@separationwidth,%
+        2.9cm);
 
     % Bottom right rectangle
     \usebeamercolor{palette primary}
     \fill[color=bg]
-      ([shift={(3.05cm, 2.9cm)}] current page.south west)
+      ([shift={(%
+          \corporate@separationposition + 0.5\corporate@separationwidth,%
+          2.9cm)}] current page.south west)
       rectangle (current page.south east);
 
     % Author, institute and date
-    \coordinate (info corner) at ([shift={(3.05,2.9)}] current page.south west);
+    \coordinate (info corner) at ([shift={(
+        \corporate@separationposition + 0.5\corporate@separationwidth,%
+        2.9cm)}] current page.south west);
 
     \ifx\insertauthor\@empty%
     \else%
@@ -91,69 +99,61 @@
 % Block environments %
 % ------------------ %
 
+\newcommand{\corporate@block@begin}[1]{%
+  \par\vskip\medskipamount%
+  \usebeamercolor{#1}
+  \ifx\insertblocktitle\@empty\newcommand{\yskiplength}{1.5ex}
+  \else\newcommand{\yskiplength}{2ex}
+  \fi
+  \begin{tikzpicture}
+    \node [
+      draw=black,
+      fill=#1.bg,
+      inner sep = 1ex,
+      inner ysep = \yskiplength,
+      text width=\paperwidth - 2cm - 5ex, 
+      minimum width=\paperwidth - 2cm - 1ex
+    ] (BOXCONTENT) \bgroup%
+    \begin{minipage}{\textwidth}
+    \usebeamerfont{beamer body}%
+    \usebeamercolor{#1}%
+}
+
+\newcommand{\corporate@block@end}[1]{%
+    \end{minipage}%
+    \egroup;
+    \usebeamercolor{#1}
+    \ifx\insertblocktitle\@empty
+    \else%
+    {
+      \node[
+        fill=#1.bg,
+        anchor=west,
+        text=#1.fg,
+        inner ysep = 1.5pt
+      ] at ([shift={(5pt,0)}]BOXCONTENT.north west) {\insertblocktitle};
+    }
+    \fi
+  \end{tikzpicture}
+  \vskip\smallskipamount
+}
+
 \defbeamertemplate*{block begin}{corporate}
 {
-  \par\vskip\medskipamount%
-  \usebeamercolor{block body}
-  \begin{tikzpicture}
-    \node[
-      draw=fg,
-      fill=bg,
-      font=\usebeamerfont{block body},
-      inner sep=2ex,
-      text width=\paperwidth - 2cm - 4ex,
-      minimum width=\paperwidth - 2cm
-    ] (BOXCONTENT) \bgroup%
+  \corporate@block@begin{block body}
 }
 
 \defbeamertemplate*{block end}{corporate}
 {
-    \egroup;
-    \ifx\insertblocktitle\@empty
-    \else%
-    {
-      \usebeamercolor{block title}
-      \node[
-        fill=bg,
-        text=fg,
-        anchor=west
-      ] at ([shift={(5pt,0)}] BOXCONTENT.north west) {\insertblocktitle};
-    }
-    \fi
-  \end{tikzpicture}
-  \vskip\smallskipamount
+  \corporate@block@end{block title}
 }
 
 \defbeamertemplate*{block alerted begin}{corporate}
 {
-  \par\vskip\medskipamount%
-  \begin{tikzpicture}
-    \usebeamercolor{block alerted body}
-    \node[
-      draw=fg,
-      fill=bg,
-      inner sep=2ex,
-      text width=\paperwidth - 2cm - 4ex,
-      minimum width=\paperwidth - 2cm,
-      align=left,
-      font=\usebeamerfont{block alerted body}
-    ] (BOXCONTENT) \bgroup \noindent%
+  \corporate@block@begin{block alerted body}
 }
 
 \defbeamertemplate*{block alerted end}{corporate}
 {
-    \egroup;
-    \ifx\insertblocktitle\@empty
-    \else%
-    {
-      \usebeamercolor{block alerted title}
-      \node[
-        fill=bg,
-        anchor=west,
-        text=fg
-      ] at ([shift={(5pt,0)}] BOXCONTENT.north west) {\insertblocktitle};
-    }
-    \fi
-  \end{tikzpicture}
-  \vskip\smallskipamount
+  \corporate@block@end{block alerted title}
 }

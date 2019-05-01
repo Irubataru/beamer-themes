@@ -21,6 +21,13 @@
 \setbeamercolor{palette tertiary}{fg=heavybluecorp, bg=heavybluecorp}
 \setbeamercolor{palette quatenary}{fg=graycorp,bg=graycorp}
 
+\setbeamercolor*{itemize item}{parent=palette secondary}
+\setbeamercolor*{item projected}{
+  use={background, palette secondary},
+  fg=background.bg,
+  bg=palette secondary.fg
+}
+
 % ---------------- %
 % Text and headers %
 % ---------------- %
@@ -80,3 +87,4 @@
 }
 
 \setbeamercolor{block alerted body}{parent=normal text}
+
