@@ -5,6 +5,13 @@
 \RequirePackage{pgfopts}
 
 \pgfkeys{
+  /corporate/outer/footline/.cd,
+    .is choice,
+    draw/.code=\setbeamertemplate{footline}[draw],
+    none/.code=\setbeamertemplate{footline}[none]
+}
+
+\pgfkeys{
   /corporate/outer/numbering/.cd,
     .is choice,
     none/.code=\setbeamertemplate{frame numbering}[none],
@@ -15,6 +22,7 @@
 \newcommand{\corporate@outer@setdefaults}{
   \pgfkeys{/corporate/outer/.cd,
     numbering=fraction,
+    footline=draw,
   }
 }
 
@@ -25,7 +33,7 @@
 \newlength{\corporate@frametitle@bandheight}
 \setlength{\corporate@frametitle@bandheight}{1.5cm}
 
-\defbeamertemplate*{frametitle}{corporate}[1][]
+\setbeamertemplate{frametitle}
 {
   \vskip.2cm%
   \begin{beamercolorbox}[wd=\paperwidth]{frametitle} 
@@ -86,7 +94,8 @@
   \rule[-\corporate@footline@padding]{0pt}{\corporate@footline@padding}
 }
 
-\defbeamertemplate*{footline}{corporate}
+\defbeamertemplate{footline}{none}{}
+\defbeamertemplate{footline}{draw}
 {
   \begin{beamercolorbox}[wd=\paperwidth,dp=1ex]{frametitle}
     \begin{tikzpicture}

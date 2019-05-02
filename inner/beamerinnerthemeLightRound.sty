@@ -75,7 +75,7 @@
 % ---------- %
 % Title page %
 % ---------- %
-\defbeamertemplate{title page}{LightRound}[1][]
+\setbeamertemplate{title page}
 { 
   \begin{tikzpicture}[overlay,remember picture]
     \usebeamercolor{normal text}
@@ -247,21 +247,22 @@
   \vskip\smallskipamount
 }
 
-\defbeamertemplate*{block begin}{LightRound}{%
+\setbeamertemplate{block begin}
+{
   \LightTheme@block@begin{block title}{block body}
 }
 
-\defbeamertemplate*{block end}{LightRound}
+\setbeamertemplate{block end}
 {
   \LightTheme@block@end{block title}
 }
 
-\defbeamertemplate*{block alerted begin}{LightRound}
+\setbeamertemplate{block alerted begin}
 {
   \LightTheme@block@begin{block alerted title}{block alerted body}
 }
 
-\defbeamertemplate*{block alerted end}{LightRound}
+\setbeamertemplate{block alerted end}
 {
   \LightTheme@block@end{block alerted title}
 }
@@ -318,5 +319,3 @@
   \end{tikzpicture}
   \vskip\smallskipamount
 }
-
-\setbeamertemplate{title page}[LightRound]

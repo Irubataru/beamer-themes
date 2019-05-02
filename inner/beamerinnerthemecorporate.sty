@@ -3,7 +3,7 @@
 % ---------- %
 % Title page %
 % ---------- %
-\defbeamertemplate*{title page}{corporate}[1][]
+\setbeamertemplate{title page}
 { 
   \begin{tikzpicture}[remember picture, overlay]
     % Top rectangle
@@ -95,6 +95,18 @@
   \end{tikzpicture}
 }
 
+\def\maketitle{%
+  \ifbeamer@inframe
+    \titlepage
+  \else
+    \frame[plain,noframenumbering]{\titlepage}
+  \fi
+}
+
+\def\titlepage{%
+  \usebeamertemplate{title page}
+}
+
 % ------------------ %
 % Block environments %
 % ------------------ %
@@ -138,22 +150,22 @@
   \vskip\smallskipamount
 }
 
-\defbeamertemplate*{block begin}{corporate}
+\setbeamertemplate{block begin}
 {
   \corporate@block@begin{block body}
 }
 
-\defbeamertemplate*{block end}{corporate}
+\setbeamertemplate{block end}
 {
   \corporate@block@end{block title}
 }
 
-\defbeamertemplate*{block alerted begin}{corporate}
+\setbeamertemplate{block alerted begin}
 {
   \corporate@block@begin{block alerted body}
 }
 
-\defbeamertemplate*{block alerted end}{corporate}
+\setbeamertemplate{block alerted end}
 {
   \corporate@block@end{block alerted title}
 }
