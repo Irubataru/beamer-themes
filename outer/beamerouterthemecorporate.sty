@@ -8,7 +8,7 @@
   /corporate/outer/footline/.cd,
     .is choice,
     draw/.code=\setbeamertemplate{footline}[draw],
-    none/.code=\setbeamertemplate{footline}[none]
+    none/.code=\setbeamertemplate{footline}[plain]
 }
 
 \pgfkeys{
@@ -94,7 +94,7 @@
   \rule[-\corporate@footline@padding]{0pt}{\corporate@footline@padding}
 }
 
-\defbeamertemplate{footline}{none}{}
+\defbeamertemplate{footline}{plain}{}
 \defbeamertemplate{footline}{draw}
 {
   \begin{beamercolorbox}[wd=\paperwidth,dp=1ex]{frametitle}
