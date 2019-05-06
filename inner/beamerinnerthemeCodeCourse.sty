@@ -58,6 +58,13 @@
     \begin{beamercolorbox}[sep=8pt,center]{author}
       \usebeamerfont{author}\insertauthor
     \end{beamercolorbox}
+    \ifx\insertinstitute\@empty%
+    \else%
+    \begin{beamercolorbox}[sep=2pt,center]{institute}
+      \usebeamerfont{institute}\insertinstitute
+      \vskip4pt
+    \end{beamercolorbox}
+    \fi
     \begin{beamercolorbox}[sep=8pt,center]{date}
       \usebeamerfont{date}\insertdate
     \end{beamercolorbox}\vskip0.5em

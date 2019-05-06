@@ -258,6 +258,19 @@
       align=right] at (datenode.north east) (author) {%
       \usebeamerfont{author}\insertauthor%
       };
+
+    \ifx\insertinstitute\@empty%
+    \else%
+    \usebeamercolor{institute}
+    \node[
+      text=fg,
+      anchor=south west,
+      align=left
+    ] (institutenode) at
+      ([shift={(1em, 1em)}] current page.south west) {%
+      \usebeamerfont{institute}\insertinstitute%
+      };
+    \fi%
       
   \end{tikzpicture}
 }
