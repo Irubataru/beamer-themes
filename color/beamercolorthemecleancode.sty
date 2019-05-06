@@ -11,28 +11,24 @@
 \setbeamercolor*{palette tertiary}{fg=OliveGreen!80!Black, bg=OliveGreen!80!Black}
 \setbeamercolor*{palette quaternary}{fg=Gray, bg=Gray}
 
-\setbeamercolor*{background}{bg=white}
+\setbeamercolor*{background canvas}{bg=white}
 
 % ---- %
 % Text %
 % ---- %
 
 \setbeamercolor{normal text}{
-  use=background,
-  fg=black,
-  bg=background.bg
+  fg=black
 }
 
 \setbeamercolor{alerted text}{
-  use={palette secondary, normal text},
-  fg=palette secondary.fg,
-  bg=normal text.bg
+  use=palette secondary,
+  fg=palette secondary.fg
 }
 
 \setbeamercolor{example text}{
-  use={palette tertiary, normal text},
-  fg=palette tertiary.fg,
-  bg=normal text.bg
+  use=palette tertiary,
+  fg=palette tertiary.fg
 }
 
 \setbeamercolor{structure}{
@@ -52,9 +48,9 @@
 }
 
 \setbeamercolor{block box}{
-  use={palette primary, background},
+  use={palette primary, background canvas},
   fg=palette primary.fg,
-  bg=background.bg
+  bg=background canvas.bg
 }
 
 \setbeamercolor{block title}{
@@ -70,9 +66,9 @@
 }
 
 \setbeamercolor{block box alerted}{
-  use={palette secondary, background},
+  use={palette secondary, background canvas},
   fg=palette secondary.fg,
-  bg=background.bg
+  bg=background canvas.bg
 }
 
 \setbeamercolor{block title alerted}{
@@ -88,9 +84,9 @@
 }
 
 \setbeamercolor{block box example}{
-  use={palette tertiary, background},
+  use={palette tertiary, background canvas},
   fg=palette tertiary.fg,
-  bg=background.bg
+  bg=background canvas.bg
 }
 
 \setbeamercolor{block title example}{
@@ -106,9 +102,9 @@
 }
 
 \setbeamercolor{block box quote}{
-  use={palette primary, background},
+  use={palette primary, background canvas},
   fg=palette primary.fg,
-  bg=background.bg
+  bg=background canvas.bg
 }
 
 \setbeamercolor{block title quote}{
@@ -118,7 +114,7 @@
 }
 
 \setbeamercolor{block author quote}{
-  use={palette quaternary, background},
+  use={palette quaternary, background canvas},
   fg=palette quaternary.fg,
-  bg=background.bg
+  bg=background canvas.bg
 }

@@ -9,12 +9,14 @@
 % ---------- %
 % Background %
 % ---------- %
+
 \setbeamertemplate{background}
 {
   \begin{tikzpicture}
     \useasboundingbox (0,0) rectangle(\the\paperwidth,\the\paperheight);
     \usebeamercolor{palette primary}
     \usebeamercolor{normal text}
+    \usebeamercolor{background canvas}
 
     \draw[
       color=palette primary.fg,
@@ -26,9 +28,9 @@
     \clip[rounded corners=1pt] ([shift={(.1,.1)}] current bounding box.south west)
       rectangle ([shift={(-.1,-.1)}] current bounding box.north east);
 
-    \fill[color=palette primary.bg] ([shift={(.1,.1)}] current bounding box.south west) -- +(.15,0) -- +(0,.15) -- cycle;
-    \fill[color=palette primary.bg] ([shift={(-.1,.1)}] current bounding box.south east) -- +(-.15,0) -- +(0,.15) -- cycle;
-    \fill[color=palette primary.bg] ([shift={(.1,-.1)}] current bounding box.north west) -- +(.15,0) -- +(0,-.15) -- cycle;
+    \fill[color=palette primary.fg] ([shift={(.1,.1)}] current bounding box.south west) -- +(.15,0) -- +(0,.15) -- cycle;
+    \fill[color=palette primary.fg] ([shift={(-.1,.1)}] current bounding box.south east) -- +(-.15,0) -- +(0,.15) -- cycle;
+    \fill[color=palette primary.fg] ([shift={(.1,-.1)}] current bounding box.north west) -- +(.15,0) -- +(0,-.15) -- cycle;
 
     \fill[palette primary.fg]
       ([shift={(0,-.75)}] current page.north east)
@@ -48,7 +50,7 @@
       ($ ([shift={(0,-.675)}] current page.north east) !.5! ([shift={(-.675,0)}] current page.north east) $);
 
     \node[
-      fill=normal text.bg,
+      fill=background canvas.bg,
       circle,
       inner sep=0,
       minimum size=7pt
@@ -80,12 +82,13 @@
   \begin{tikzpicture}[overlay,remember picture]
     \usebeamercolor{normal text}
     \usebeamercolor{palette primary}
+    \usebeamercolor{background canvas}
 
     \clip
       ([shift={(.1,.1)}] current page.south west) rectangle
       ([shift={(-.1,-.1)}] current page.north east);
 
-    \fill[normal text.bg] (current page.north east) rectangle +(-2,-2);
+    \fill[background canvas.bg] (current page.north east) rectangle +(-2,-2);
 
     \draw[
       color=palette primary.fg,
@@ -113,7 +116,7 @@
       ($ ([shift={(0,-5.25)}] current page.north west) !.5! ([shift={(5.25,0)}] current page.north west) $);
 
     \node[
-      fill=normal text.bg,
+      fill=background canvas.bg,
       circle,
       inner sep=0,
       minimum size=1cm
