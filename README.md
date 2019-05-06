@@ -22,7 +22,7 @@ stackexchange](http://tex.stackexchange.com/questions/146529/design-a-custom-bea
 
 I used it to learn how to make my own beamer themes.
 
-Screenshots:
+#### Screenshots
 
 <table>
   <tr>
@@ -46,7 +46,7 @@ overloaded boxes that I find pleasing.
 
 This package needs the [dvipsnames,usenames] options for beamer.
 
-Screenshots:
+#### Screenshots
 
 <table>
   <tr>
@@ -72,43 +72,66 @@ Screenshots:
   </tr>
 </table>
 
-### "LightRound"
+### "LightTheme"
 My theme for the Lattice Conference 2015. It has some simple geometric shapes and matching boxes.
 
-The colour theme I got from here (slightly modified)
+It was originally known as "LightRound" (or "LightSquare"), but these have been
+removed in favour of this theme which can produce both of them. On top of the
+regular [configurations](#configuration) there is also a flag which changes the shapes in the
+various banners. The flag is called `shape` and can be
+ - `circle` (default)
+ - `square`
+ - `pentagon`
+ - `hexagon`
+ - `septagon`
+ - `octagon`
 
-https://color.adobe.com/Flat-UI-color-theme-2469224/?showPublished=true
+```tex
+\usetheme[shape=circle]{LightTheme} % Identical to using LightRound
+\usetheme[shape=square]{LightTheme} % Identical to using LightSquare
+```
 
-Screenshots:
+The colour theme is a slight modification on a theme called [Flat UI][flat-ui-theme].
+
+#### Screenshots
 
 <table>
   <tr>
     <td>
-      <img src="https://raw.githubusercontent.com/Irubataru/beamer-themes-screenshots/master/light.round/screenshot-1.png" alt="Title Page" width="400">
+      <img src="https://raw.githubusercontent.com/Irubataru/beamer-themes-screenshots/master/light.theme/screenshot-1.png" alt="Title Page" width="400">
     </td>
     <td>
-      <img src="https://raw.githubusercontent.com/Irubataru/beamer-themes-screenshots/master/light.round/screenshot-2.png" alt="Items" width="400">
+      <img src="https://raw.githubusercontent.com/Irubataru/beamer-themes-screenshots/master/light.theme/screenshot-2.png" alt="Section page" width="400">
     </td>
   </tr>
   <tr>
     <td>
-      <img src="https://raw.githubusercontent.com/Irubataru/beamer-themes-screenshots/master/light.round/screenshot-3.png" alt="Boxes1" width="400">
+      <img src="https://raw.githubusercontent.com/Irubataru/beamer-themes-screenshots/master/light.theme/screenshot-3.png" alt="Items" width="400">
     </td>
     <td>
-      <img src="https://raw.githubusercontent.com/Irubataru/beamer-themes-screenshots/master/light.round/screenshot-4.png" alt="Boxes2" width="400">
+      <img src="https://raw.githubusercontent.com/Irubataru/beamer-themes-screenshots/master/light.theme/screenshot-4.png" alt="Boxes1" width="400">
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <img src="https://raw.githubusercontent.com/Irubataru/beamer-themes-screenshots/master/light.theme/screenshot-5.png" alt="Boxes2" width="400">
     </td>
   </tr>
 </table>
 
-### "LightSquare"
-Basically the same as LightRound, but with all the circles replaced with rectangles. Screenshots might follow.
-
 ### "CodeCourse"
+
 The theme I used for the [C++ course](https://github.com/Irubataru/cpp-lecture-2015) I gave in 2015.
 
-Font used for the examples: [Yanone Kaffeesatz Bold](http://www.yanone.de/typedesign/kaffeesatz/?key=typedesign/kaffeesatz)
+The theme is configured to use the following two fonts:
+  - [Yanone Kaffeesatz][yanone-kaffeesatz]
+  - [Fira Code][fira-code]
 
-Colours: [fresh cut day](http://www.colourlovers.com/palette/46688/fresh_cut_day) and [marty](http://www.colourlovers.com/color/FA2A00/marty)
+The colours are:
+ - Theme [fresh cut day](https://www.colourlovers.com/palette/46688/fresh_cut_day)
+ - Colour [marty](http://www.colourlovers.com/color/FA2A00/marty)
+
+#### Screenshots
 
 <table>
   <tr>
@@ -137,6 +160,23 @@ Colours: [fresh cut day](http://www.colourlovers.com/palette/46688/fresh_cut_day
   </tr>
 </table>
 
+## Configuration
+
+I have tried my best to use the standard beamer names for the colours and fonts,
+but if anything is off then you can read the sources in [color](color) to see
+which name I have used.
+
+All of the themes have a flag you can use to change the slide numbering format.
+The key is named `numbering` and has three options:
+
+ - `none` no numbering
+ - `counter` a simple page count
+ - `fraction` current page / total pages
+
+```tex
+\usetheme[numbering=none]{LightTheme}
+\usetheme[noslidenumbes]{LightTheme} % Same as numbering=none
+```
 
 ## Installation
 
@@ -162,3 +202,6 @@ MIT
 
 [screenshot-repo]: https://github.com/Irubataru/beamer-themes-screenshots
 [talks-repo]: https://github.com/Irubataru/talks
+[flat-ui-theme]: https://color.adobe.com/Flat-UI-color-theme-2469224/?showPublished=true
+[yanone-kaffeesatz]: http://www.yanone.de/typedesign/kaffeesatz/?key=typedesign/kaffeesatz
+[fira-code]: https://github.com/tonsky/FiraCode
