@@ -74,11 +74,20 @@
   \end{tikzpicture}
 }
 
-% ---------- %
-% Title page %
-% ---------- %
+% ----------------------- %
+% Title and section pages %
+% ----------------------- %
+
+% I actually do not understand how or why this works, or how I would do this
+% without this \@nameuse command.
+% Source: https://tex.stackexchange.com/a/323638/39313
+\def\ps@footline@none{%
+  \setbeamertemplate{footline}{}%
+  \@nameuse{ps@footline}}
+
 \setbeamertemplate{title page}
 { 
+  \thispagestyle{footline@none}
   \begin{tikzpicture}[overlay,remember picture]
     \usebeamercolor{normal text}
     \usebeamercolor{palette primary}
@@ -190,9 +199,21 @@
   \end{tikzpicture}
 }
 
-% ------ %
-% blocks %
-% ------ %
+\setbeamertemplate{section page}
+{
+  \thispagestyle{footline@none}
+  \begingroup
+    \centering
+    \vskip1cm\par
+    \begin{beamercolorbox}[sep=12pt,center]{section title}
+      \usebeamerfont{section title}\insertsection\par
+    \end{beamercolorbox}
+  \endgroup
+}
+
+% ------------------ %
+% Block environments %
+% ------------------ %
 
 \newcommand{\LightTheme@block@begin}[2]{%
   \par\vskip\medskipamount%
