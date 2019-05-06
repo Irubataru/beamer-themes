@@ -1,11 +1,14 @@
-\mode<presentation>
+% Requirements
+\ProvidesPackage{beamerinnerthemeCodeCourse}
 
-\RequirePackage{xifthen}
-\RequirePackage{xparse}
+% ----- %
+% Items %
+% ----- %
 
 \setbeamertemplate{sections/subsections in toc}[square]
 \setbeamertemplate{items}[square]
 \setbeamertemplate{itemize item}{\raise1.5pt\hbox{\vrule width 1ex height 1ex}}
+
 \setbeamertemplate{enumerate item}
 {
   \raise2.5pt%
@@ -21,8 +24,20 @@
   }%
 }
 
-\defbeamertemplate*{title page}{CodeCourse}[1][]
+% --------------------------- %
+% Title page and section page %
+% --------------------------- %
+
+% I actually do not understand how or why this works, or how I would do this
+% without this \@nameuse command.
+% Source: https://tex.stackexchange.com/a/323638/39313
+\def\ps@footline@none{%
+  \setbeamertemplate{footline}{}%
+  \@nameuse{ps@footline}}
+
+\setbeamertemplate{title page}
 {
+  \thispagestyle{footline@none}
   \usebeamercolor{title page background canvas}
   \begin{tikzpicture}[overlay,remember picture]
     \fill[bg] (current page.south west) rectangle (current page.north east);
@@ -31,7 +46,7 @@
   \vfill
   \begingroup
     \centering
-    \begin{beamercolorbox}[sep=8pt,center,#1]{title}
+    \begin{beamercolorbox}[sep=8pt,center]{title}
       \usebeamerfont{title}\inserttitle\par%
       \ifx\insertsubtitle\@empty%
       \else%
@@ -40,10 +55,10 @@
       \fi%     
     \end{beamercolorbox}%
     \vskip1em\par
-    \begin{beamercolorbox}[sep=8pt,center,#1]{author}
+    \begin{beamercolorbox}[sep=8pt,center]{author}
       \usebeamerfont{author}\insertauthor
     \end{beamercolorbox}
-    \begin{beamercolorbox}[sep=8pt,center,#1]{date}
+    \begin{beamercolorbox}[sep=8pt,center]{date}
       \usebeamerfont{date}\insertdate
     \end{beamercolorbox}\vskip0.5em
     {\usebeamercolor[fg]{titlegraphic}\inserttitlegraphic\par}
@@ -51,8 +66,9 @@
   \vfill
 }
 
-\defbeamertemplate*{section page}{CodeCourse}[1][]
+\setbeamertemplate{section page}
 {
+  \thispagestyle{footline@none}
   \usebeamercolor{section page background canvas}
   \begin{tikzpicture}[overlay,remember picture]
     \fill[bg] (current page.south west) rectangle (current page.north east);
@@ -60,159 +76,83 @@
   \begingroup
     \centering
     \vskip1cm\par
-    \begin{beamercolorbox}[sep=12pt,center,#1]{section title}
+    \begin{beamercolorbox}[sep=12pt,center]{section title}
       \usebeamerfont{section title}\insertsection\par
     \end{beamercolorbox}
   \endgroup
 }
 
-% Block environments
+% ------------------ %
+% Block environments %
+% ------------------ %
 
-\NewDocumentEnvironment{quoteblock}{m o}%
-{
+\newcommand{\CodeCourse@block@begin}[2]{%
   \par\vskip\medskipamount%
-  \usebeamercolor{palette quaternary}
-  \begin{tikzpicture}
-    \node [
-      draw=fg, inner sep=2ex, 
-      text width=\paperwidth - 2cm - 5ex, 
-      minimum width=\paperwidth - 2cm - 1ex,
-      rounded corners
-    ] (BOXCONTENT) \bgroup%
-    \usebeamerfont{beamer body}
-}{
-  \egroup;
-  \usebeamercolor{palette quatenary}
-  \ifthenelse{\isempty{#1}}%
-  {}%
-  {
-    \node [
-      fill=fg,
-      anchor=west,
-      text=white,
-      rounded corners
-    ] at ([shift={(5pt,0)}]BOXCONTENT.north west) {#1};
-  }
-  \IfNoValueF{#2}
-  {
-    \node [
-      fill=white,
-      anchor=east,
-      text=bg
-    ] at ([shift={(-5pt,0)}]BOXCONTENT.south east) {#2};
-  }
-  \end{tikzpicture}
-  \vskip\smallskipamount
-}
-
-\defbeamertemplate*{block begin}{CodeCourse}
-{
-  \par\vskip\medskipamount%
-  \usebeamercolor{block title}
   \ifx\insertblocktitle\@empty\newcommand{\yskiplength}{1.5ex}
   \else\newcommand{\yskiplength}{2ex}
   \fi
+  \usebeamercolor{#1}
   \begin{tikzpicture}
     \node [
-      draw=fg,
+      draw=#1.fg,
+      fill=#1.bg,
       inner sep = 1ex,
       inner ysep = \yskiplength,
       text width=\paperwidth - 2cm - 5ex, 
       minimum width=\paperwidth - 2cm - 1ex,
-      rounded corners=1pt
+      rounded corners
     ] (BOXCONTENT) \bgroup%
     \begin{minipage}{\textwidth}
+    \usebeamercolor{#2}
     \usebeamerfont{beamer body}%
-    \usebeamercolor{block body}%
 }
 
-\defbeamertemplate*{block end}{CodeCourse}
-{
-  \end{minipage}%
-  \egroup;
-  \usebeamercolor{block title}
-  \ifx\insertblocktitle\@empty
-  \else%
-  {
-    \node[
-      fill=bg,
-      anchor=west,
-      text=fg,
-      rounded corners
-    ] at ([shift={(5pt,0)}]BOXCONTENT.north west) {\insertblocktitle};
-  }
-  \fi
+\newcommand{\CodeCourse@block@end}[1]{%
+    \end{minipage}%
+    \egroup;
+    \usebeamercolor{#1}
+    \ifx\insertblocktitle\@empty
+    \else%
+    {
+      \node[
+        fill=#1.bg,
+        text=#1.fg,
+        anchor=west,
+        inner ysep = 1.5pt,
+        rounded corners
+      ] at ([shift={(5pt,0)}]BOXCONTENT.north west) {\insertblocktitle};
+    }
+    \fi
   \end{tikzpicture}
   \vskip\smallskipamount
+}
+
+\setbeamertemplate{block begin}
+{
+  \CodeCourse@block@begin{block box}{block body}
+}
+
+\setbeamertemplate{block end}
+{
+  \CodeCourse@block@end{block title}
 }
 
 \defbeamertemplate*{block example begin}{CodeCourse}
 {
-  \par\vskip\medskipamount%
-  \usebeamercolor{block title example}
-  \begin{tikzpicture}
-    \node [
-      draw=fg, inner sep=2ex, 
-      text width=\paperwidth - 2cm - 5ex, 
-      minimum width=\paperwidth - 2cm - 1ex,
-      align=left, rounded corners
-    ] (BOXCONTENT) \bgroup \noindent%
-    \usebeamerfont{beamer body}%
-    \usebeamercolor{block body}
+  \CodeCourse@block@begin{block box example}{block body example}
 }
 
 \defbeamertemplate*{block example end}{CodeCourse}
 {
-  \egroup;
-  \usebeamercolor{block title example}
-  \ifx\insertblocktitle\@empty
-  \else%
-  {
-    \node [
-      fill=bg,
-      anchor=west,
-      text=fg, 
-      rounded corners
-    ] at ([shift={(5pt,0)}]BOXCONTENT.north west) {\insertblocktitle};
-  }
-  \fi
-  \end{tikzpicture}
-  \vskip\smallskipamount
+  \CodeCourse@block@end{block title example}
 }
 
 \defbeamertemplate*{block alerted begin}{CodeCourse}
 {
-  \par\vskip\medskipamount%
-  \usebeamercolor{block title alerted}
-  \begin{tikzpicture}
-    \node [
-      draw=fg, inner sep=2ex, 
-      text width=\paperwidth - 2cm - 5ex, 
-      minimum width=\paperwidth - 2cm - 1ex,
-      align=left, rounded corners
-    ] (BOXCONTENT) \bgroup \noindent%
-    \usebeamerfont{beamer body}%
-    \usebeamercolor{block body}
+  \CodeCourse@block@begin{block box alerted}{block body alerted}
 }
 
 \defbeamertemplate*{block alerted end}{CodeCourse}
 {
-  \egroup;
-  \usebeamercolor{block title alerted}
-  \ifx\insertblocktitle\@empty
-  \else%
-  {
-    \node [
-      fill=bg,
-      anchor=west,
-      text=fg, 
-      rounded corners
-    ] at ([shift={(5pt,0)}]BOXCONTENT.north west) {\insertblocktitle};
-  }
-  \fi
-  \end{tikzpicture}
-  \vskip\smallskipamount
+  \CodeCourse@block@end{block title alerted}
 }
-
-\mode
-<all>

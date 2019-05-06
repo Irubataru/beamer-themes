@@ -1,17 +1,36 @@
-\mode<presentation>
-
 % Requirement
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{beamerthemeCodeCourse}
+\RequirePackage{etoolbox}
 \RequirePackage{tikz}
+\RequirePackage{pgfopts}
+
+\pgfkeys{/CodeCourse/.cd,
+  .search also={
+    /CodeCourse/outer,
+  }
+}
+
 \usetikzlibrary{positioning,calc}
 
-% Settings
+% Sub-styles
 \useinnertheme{CodeCourse}
 \useoutertheme{CodeCourse}
 \usecolortheme{CodeCourse}
 \usefonttheme{CodeCourse}
 
-% Various
+% Settings
 \setbeamertemplate{navigation symbols}{} %Remove beamer navigation symbols
 \setbeamertemplate{bibliography item}{\insertbiblabel}
 
-\mode<all>
+\pgfkeys{/CodeCourse/.cd,
+  noslidenumbers/.code=\pgfkeysalso{outer/numbering=none},
+}
+
+\AtEndPreamble{%
+  \@ifpackageloaded{pgfplots}{%
+    \RequirePackage{pgfplotsthemetol}
+  }{}
+}
+
+\ProcessPgfOptions{/CodeCourse}
