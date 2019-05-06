@@ -1,0 +1,39 @@
+% Requirement
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{beamerthememeLightTheme}
+\RequirePackage{etoolbox}
+\RequirePackage{tikz}
+\RequirePackage{pgfopts}
+
+\pgfkeys{/LightTheme/.cd,
+  .search also={
+    /LightTheme/outer,
+    /LightTheme/inner,
+  }
+}
+\usetikzlibrary{positioning,calc}
+
+% Settings
+\useinnertheme{LightTheme}
+\useoutertheme{LightTheme}
+\usecolortheme{LightTheme}
+\usefonttheme{LightTheme}
+
+\setbeamertemplate{navigation symbols}{}
+
+% Items
+\setbeamertemplate{enumerate items}[square]
+\setbeamertemplate{itemize items}[circle]
+\setbeamertemplate{sections/subsections in toc}[square]
+
+\pgfkeys{/LightTheme/.cd,
+  noslidenumbers/.code=\pgfkeysalso{outer/numbering=none},
+}
+
+\AtEndPreamble{%
+  \@ifpackageloaded{pgfplots}{%
+    \RequirePackage{pgfplotsthemetol}
+  }{}
+}
+
+\ProcessPgfOptions{/LightTheme}
