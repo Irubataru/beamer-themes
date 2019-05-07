@@ -127,9 +127,10 @@ The colour theme is a slight modification on a theme called [Flat UI][flat-ui-th
 
 The theme I used for the [C++ course](https://github.com/Irubataru/cpp-lecture-2015) I gave in 2015.
 
-The theme is configured to use the following two fonts:
-  - [Yanone Kaffeesatz][yanone-kaffeesatz]
-  - [Fira Code][fira-code]
+The theme is configured to use the following fonts:
+  - [Yanone Kaffeesatz][yanone-kaffeesatz] (default font)
+  - [Fira Code][fira-code] (monospace font)
+  - Linux Libertine O (math font)
 
 The colours are:
  - Theme [fresh cut day](https://www.colourlovers.com/palette/46688/fresh_cut_day)

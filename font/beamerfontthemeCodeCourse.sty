@@ -39,22 +39,23 @@
     \fi%
   }
 
+  % Set main font
   \iffontsavailable{%
     Yanone Kaffeesatz Light,%
     Yanone Kaffeesatz Bold%
   }{%
-    \setmainfont[
+    \setsansfont[
       ItalicFont={Yanone Kaffeesatz Light},
       Scale=1.3,
       LetterSpace=2.0
     ]{Yanone Kaffeesatz Bold}
-    \usefonttheme{serif}
   }{%
     \PackageWarning{beamerthememeCodeCourse}{%
       Could not find Yanone Kaffeesatz fonts%
     }
   }
 
+  % Set monospaced font
   \iffontsavailable{%
     Fira Code%
   }{%
@@ -62,6 +63,19 @@
   }{%
     \PackageWarning{beamerthememeCodeCourse}{%
       Could not find Fira Code font%
+    }
+  }
+
+  % Set math font
+  \iffontsavailable{%
+    Linux Libertine O%
+  }{%
+    \usefonttheme[onlymath]{serif}
+    \setmainfont{Linux Libertine O}
+    \setmathrm{Linux Libertine O}
+  }{%
+    \PackageWarning{beamerthememeCodeCourse}{%
+      Could not find Linux Libertine 0 font%
     }
   }
 }{%
