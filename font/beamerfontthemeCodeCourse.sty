@@ -9,6 +9,8 @@
 \RequirePackage{ifxetex}
 \RequirePackage{ifluatex}
 
+% font logic from mtheme
+% https://github.com/matze/mtheme
 \ifboolexpr{bool {xetex} or bool {luatex}}{
   \@ifpackageloaded{mathspec}{
     \PassOptionsToPackage{quiet}{mathspec}

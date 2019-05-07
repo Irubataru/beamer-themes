@@ -18,7 +18,7 @@ themes when making them.
 ### "corporate"
 
 This is a simple blue and orange theme inspired by [the following post on
-stackexchange](http://tex.stackexchange.com/questions/146529/design-a-custom-beamer-theme-from-scratch).
+stackexchange][stackexchange-post].
 
 I used it to learn how to make my own beamer themes.
 
@@ -44,7 +44,11 @@ I used it to learn how to make my own beamer themes.
 The theme I prefer to use when giving a programming-related talk. It is mostly empty and has 
 overloaded boxes that I find pleasing.
 
-This package needs the [dvipsnames,usenames] options for beamer.
+This package needs the `[dvipsnames,usenames]` options for beamer.
+
+```tex
+\documentclass[dvipsnames,usenames]{beamer}
+```
 
 #### Screenshots
 
@@ -196,12 +200,20 @@ export TEXINPUTS=/path/to/repo//:$TEXINPUTS
 Note the extra `//` at the end of the path as it tells latex to include files
 recursively.
 
+## Inspiration
+
+ - [This stackexchange post is what got me started][stackexchange-post]
+ - [mtheme][mtheme] has been an invaluable source of examples for how certain
+   things can be carries out in latex and beamer
+
 ## License
 
 MIT
 
 [screenshot-repo]: https://github.com/Irubataru/beamer-themes-screenshots
 [talks-repo]: https://github.com/Irubataru/talks
+[stackexchange-post]: http://tex.stackexchange.com/questions/146529/design-a-custom-beamer-theme-from-scratch
 [flat-ui-theme]: https://color.adobe.com/Flat-UI-color-theme-2469224/?showPublished=true
 [yanone-kaffeesatz]: http://www.yanone.de/typedesign/kaffeesatz/?key=typedesign/kaffeesatz
 [fira-code]: https://github.com/tonsky/FiraCode
+[mtheme]: https://github.com/matze/mtheme
