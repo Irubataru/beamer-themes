@@ -1,32 +1,93 @@
-\mode<presentation>
+% -----------------------------------------------------------------------------
+% Beamer colour theme: corporate
+% Copyright (c) 2019 Jonas R. Glesaaen (jonas@glesaaen.com)
+% -----------------------------------------------------------------------------
 
 % Requirement
 \RequirePackage{xcolor}
-\RequirePackage{jonasextra}
+\ProvidesPackage{beamercolorthemecorporate}
 
-% Colours
+% -------------------- %
+% Colours and palettes %
+% -------------------- %
+
 \definecolor{heavybluecorp}{RGB}{48,66,105}
 \definecolor{lightbluecorp}{RGB}{145,190,212}
 \definecolor{lightgraycorp}{RGB}{217,232,255}
 \definecolor{orangecorp}{RGB}{242,97,1}
 \definecolor{graycorp}{RGB}{217,232,245}
 
-% Settings
-\setbeamercolor*{title page header}{fg=white}
-\setbeamercolor*{author}{fg=white}
-\setbeamercolor*{date}{fg=white}
-\setbeamercolor*{header text}{fg=white}
+\setbeamercolor*{background canvas}{bg=white}
 
-% For the boxes
-\setbeamercolor*{palette base}{bg=heavybluecorp}
-\setbeamercolor*{palette primary}{bg=orangecorp,fg=white}
-\setbeamercolor*{palette secondary}{bg=lightbluecorp,fg=white}
-\setbeamercolor*{palette tertiary}{bg=graycorp,fg=white}
+% Translation into palettes
+\setbeamercolor*{palette base}{fg=black, bg=black}
+\setbeamercolor*{palette primary}{fg=lightbluecorp,bg=lightbluecorp}
+\setbeamercolor*{palette secondary}{fg=orangecorp,bg=orangecorp}
+\setbeamercolor*{palette tertiary}{fg=heavybluecorp, bg=heavybluecorp}
+\setbeamercolor*{palette quaternary}{fg=graycorp,bg=graycorp}
 
-% Items
-\setbeamercolor*{item}{fg=orangecorp}
-\setbeamercolor*{alerted text}{fg=orangecorp}
+\setbeamercolor*{itemize item}{parent=palette secondary}
+\setbeamercolor*{item projected}{
+  use={background canvas, palette secondary},
+  fg=background canvas.bg,
+  bg=palette secondary.fg
+}
 
+% ---------------- %
+% Text and headers %
+% ---------------- %
 
-\mode
-<all>
+\setbeamercolor*{normal text}{
+  use=palette base,
+  fg=palette base.fg
+}
+
+\setbeamercolor*{title page header}{
+  use=background canvas,
+  fg=background canvas.bg
+}
+
+\setbeamercolor*{author}{parent=title page header}
+\setbeamercolor*{date}{parent=title page header}
+
+\setbeamercolor*{header text}{
+  use=normal text,
+  fg=normal text.fg
+}
+
+\setbeamercolor*{alerted text}{
+  use=palette secondary,
+  fg=palette secondary.fg
+}
+
+% Header text
+\setbeamercolor*{frametitle}{
+  use=background canvas, 
+  fg=background canvas.bg
+}
+
+\setbeamercolor*{framesubtitle}{parent=frametitle}
+
+% Footer text
+\setbeamercolor*{footline}{parent=frametitle}
+\setbeamercolor*{frame numbering}{parent=footline}
+
+% ------ %
+% Blocks %
+% ------ %
+
+\setbeamercolor*{block title}{
+  use={palette primary,background canvas},
+  fg=palette primary.fg,
+  bg=background canvas.bg
+}
+
+\setbeamercolor*{block body}{parent=normal text}
+
+\setbeamercolor*{block alerted title}{
+  use={alerted text, background canvas},
+  fg=alerted text.fg,
+  bg=background canvas.bg
+}
+
+\setbeamercolor*{block alerted body}{parent=normal text}

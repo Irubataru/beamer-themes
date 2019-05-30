@@ -1,7 +1,27 @@
-\mode<presentation>
+% -----------------------------------------------------------------------------
+% Beamer outer theme: CodeCourse
+% Copyright (c) 2019 Jonas R. Glesaaen (jonas@glesaaen.com)
+% -----------------------------------------------------------------------------
 
-% Frame title
-\defbeamertemplate*{frametitle}{CodeCourse}[1][]
+% Requirements
+\ProvidesPackage{beamerouterthemeCodeCourse}
+
+\pgfkeys{
+  /CodeCourse/outer/numbering/.cd,
+    .is choice,
+    none/.code=\setbeamertemplate{frame numbering}[none],
+    counter/.code=\setbeamertemplate{frame numbering}[counter],
+    fraction/.code=\setbeamertemplate{frame numbering}[fraction],
+}
+
+\newcommand{\CodeCourse@outer@setdefaults}{
+  \pgfkeys{/CodeCourse/outer/.cd,
+    numbering=fraction,
+  }
+}
+
+
+\setbeamertemplate{frametitle}
 {
   \begin{beamercolorbox}[sep=0.5cm,wd=0.92\paperwidth]{frametitle} 
     \usebeamercolor{frametitle}%
@@ -18,17 +38,21 @@
   \end{beamercolorbox}
 }
 
-% Frame footer
-\defbeamertemplate*{footline}{CodeCourse}
-{
-  \leavevmode%
-  \hbox{%
-  \begin{beamercolorbox}[wd=\paperwidth,ht=2.5ex,dp=1ex]{frametitle}
-    \usebeamercolor{palette base}
-    \hskip 2.5ex\strut{}\insertframenumber / \strut{}\inserttotalframenumber\vskip .5ex
-  \end{beamercolorbox}%
-  }
+% Frame numbering
+\defbeamertemplate{frame numbering}{none}{}
+\defbeamertemplate{frame numbering}{counter}{\strut{}\insertframenumber}
+\defbeamertemplate{frame numbering}{fraction}{
+  \strut{}\insertframenumber/\inserttotalframenumber
 }
 
+\setbeamertemplate{footline}
+{
+  \begin{beamercolorbox}[wd=\textwidth, sep=1.5ex]{footline}%
+    \hfill%
+    \usebeamercolor{frame numbering}
+    \usebeamertemplate*{frame numbering}
+  \end{beamercolorbox}%
+}
 
-\mode<all>
+\CodeCourse@outer@setdefaults
+\ProcessPgfPackageOptions{/CodeCourse/outer}

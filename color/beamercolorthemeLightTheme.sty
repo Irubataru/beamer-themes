@@ -1,3 +1,8 @@
+% -----------------------------------------------------------------------------
+% Beamer colour theme: LightTheme
+% Copyright (c) 2019 Jonas R. Glesaaen (jonas@glesaaen.com)
+% -----------------------------------------------------------------------------
+
 % Requirement
 \RequirePackage{xcolor}
 \ProvidesPackage{beamercolorthemeLightTheme}
@@ -10,61 +15,73 @@
 \definecolor{LightUIBlue}{RGB}{41,128,185}
 
 % The various palettes
-\setbeamercolor{palette base}{fg=LightUIBase, bg=LightUIBase}
-\setbeamercolor{palette primary}{fg=LightUILightBlue, bg=LightUILightBlue}
-\setbeamercolor{palette secondary}{fg=LightUIRed, bg=LightUIRed}
-\setbeamercolor{palette tertiary}{fg=LightUIBlue, bg=LightUIBlue}
+\setbeamercolor*{palette base}{fg=LightUIBase, bg=LightUIBase}
+\setbeamercolor*{palette primary}{fg=LightUILightBlue, bg=LightUILightBlue}
+\setbeamercolor*{palette secondary}{fg=LightUIRed, bg=LightUIRed}
+\setbeamercolor*{palette tertiary}{fg=LightUIBlue, bg=LightUIBlue}
 
-\setbeamercolor*{background}{bg=white}
+\setbeamercolor*{background canvas}{bg=white}
 
 % Text and headings
-\setbeamercolor{normal text}{
-  use={palette base,background},
-  fg=palette base.fg,
-  bg=background.bg
+\setbeamercolor*{normal text}{
+  use=palette base,
+  fg=palette base.fg
 }
 
-\setbeamercolor{title page header}{use=normal text, parent=normal text}
-\setbeamercolor{author}{use=normal text, parent=normal text}
-\setbeamercolor{date}{use=normal text, parent=normal text}
-\setbeamercolor{header text}{use=normal text, fg=normal text}
+\setbeamercolor*{title page header}{use=normal text, parent=normal text}
+\setbeamercolor*{author}{use=normal text, parent=normal text}
+\setbeamercolor*{date}{use=normal text, parent=normal text}
+\setbeamercolor*{header text}{use=normal text, fg=normal text}
 
-\setbeamercolor{footline}{
+\setbeamercolor*{section title}{use=normal text, parent=normal text}
+
+\setbeamercolor*{footline}{
   use=palette primary,
-  fg=palette primary.fg,
-  bg=
+  fg=palette primary.fg
 }
 
-\setbeamercolor{frame numbering}{use=footline, parent=footline}
+\setbeamercolor*{frame numbering}{use=footline, parent=footline}
 
-\setbeamercolor{alerted text}{use=palette secondary, fg=palette secondary.fg}
-\setbeamercolor{frametitle}{use=alerted text, parent=alerted text}
-\setbeamercolor{framesubtitle}{use=frametitle, parent=frametitle}
+\setbeamercolor*{alerted text}{
+  use=palette secondary, fg=palette secondary.fg
+}
+
+\setbeamercolor*{frametitle}{use=alerted text, parent=alerted text}
+\setbeamercolor*{framesubtitle}{use=frametitle, parent=frametitle}
 
 % For the blocks
-\setbeamercolor{block title}{
-  use={palette tertiary,normal text},
+\setbeamercolor*{block title}{
+  use={palette tertiary,background canvas},
   fg=palette tertiary.fg,
-  bg=normal text.bg
+  bg=background canvas.bg
 }
 
-\setbeamercolor{block body}{use=normal text, parent=normal text}
+\setbeamercolor{block body}{
+  use=normal text,
+  parent=normal text
+}
 
 \setbeamercolor{block alerted title}{
-  use={palette secondary, normal text},
+  use={palette secondary, background canvas},
   fg=palette secondary.fg,
-  bg=normal text.bg
+  bg=background canvas.bg
 }
 
-\setbeamercolor{block alerted body}{use=normal text, parent=normal text}
+\setbeamercolor{block alerted body}{
+  use=normal text,
+  parent=normal text
+}
 
 \setbeamercolor{block grey title}{
-  use={palette base, normal text},
+  use={palette base, background canvas},
   fg=palette base.fg,
-  bg=normal text.bg
+  bg=background canvas.bg
 }
 
-\setbeamercolor{block grey body}{use=normal text, parent=normal text}
+\setbeamercolor{block grey body}{
+  use=normal text,
+  parent=normal text
+}
 
 % Items
 \setbeamercolor{item}{use=palette secondary, fg=palette secondary.fg}

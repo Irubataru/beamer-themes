@@ -1,20 +1,91 @@
+% -----------------------------------------------------------------------------
+% Beamer inner theme: LightTheme
+% Copyright (c) 2019 Jonas R. Glesaaen (jonas@glesaaen.com)
+% -----------------------------------------------------------------------------
+
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{beamerinnerthemeLightRound}
+\ProvidesPackage{beamerinnerthemeLightTheme}
 \RequirePackage{etoolbox}
 \RequirePackage{calc}
 \RequirePackage{pgfopts}
 \RequirePackage{xifthen}
 \RequirePackage{xparse}
 
+\usetikzlibrary{shapes.geometric}
+
+\newcommand{\LightTheme@inner@setshapetemplates}[2]{
+  \setbeamertemplate{background band shape}[#1]{#2}
+  \setbeamertemplate{title page band shape}[#1]{#2}
+  \setbeamertemplate{block corner shape}[#1]{#2}
+}
+
+\pgfkeys{
+  /LightTheme/inner/shape/.cd,
+    .is choice,
+    circle/.code=\LightTheme@inner@setshapetemplates{circle}{},
+    square/.code=\LightTheme@inner@setshapetemplates{regular polygon}{4},
+    pentagon/.code=\LightTheme@inner@setshapetemplates{regular polygon}{5},
+    hexagon/.code=\LightTheme@inner@setshapetemplates{regular polygon}{6},
+    septagon/.code=\LightTheme@inner@setshapetemplates{regular polygon}{7},
+    octagon/.code=\LightTheme@inner@setshapetemplates{regular polygon}{8},
+}
+
+\newcommand{\LightTheme@inner@setdefaults}{
+  \pgfkeys{/LightTheme/inner/.cd,
+    shape=circle,
+  }
+}
+
 % ---------- %
 % Background %
 % ---------- %
+
+\newcommand{\LightTheme@inner@background@shape}[2]{
+  \node[
+    fill=background canvas.bg,
+    #1,
+    inner sep=0,
+    minimum size=#2
+  ] at (midpoint) {};
+
+  \node[
+    draw=palette primary.fg,
+    thin,
+    #1,
+    inner sep=0,
+    minimum size=0.6*#2
+  ] at (midpoint) {};
+
+  \node[
+    fill=palette primary.fg,
+    thin,
+    #1,
+    inner sep=0,
+    minimum size=0.15*#2
+  ] at (midpoint) {};
+}
+
+\defbeamertemplate{background band shape}{circle}[1]
+{
+  \LightTheme@inner@background@shape{circle}{7pt}
+}
+
+\defbeamertemplate{background band shape}{regular polygon}[1]
+{
+  \ifthenelse{#1 < 5}{%
+    \LightTheme@inner@background@shape{regular polygon, regular polygon sides=#1}{10pt}%
+  }{%
+    \LightTheme@inner@background@shape{regular polygon, regular polygon sides=#1}{7pt}%
+  }
+}
+
 \setbeamertemplate{background}
 {
   \begin{tikzpicture}
     \useasboundingbox (0,0) rectangle(\the\paperwidth,\the\paperheight);
     \usebeamercolor{palette primary}
     \usebeamercolor{normal text}
+    \usebeamercolor{background canvas}
 
     \draw[
       color=palette primary.fg,
@@ -26,9 +97,9 @@
     \clip[rounded corners=1pt] ([shift={(.1,.1)}] current bounding box.south west)
       rectangle ([shift={(-.1,-.1)}] current bounding box.north east);
 
-    \fill[color=palette primary.bg] ([shift={(.1,.1)}] current bounding box.south west) -- +(.15,0) -- +(0,.15) -- cycle;
-    \fill[color=palette primary.bg] ([shift={(-.1,.1)}] current bounding box.south east) -- +(-.15,0) -- +(0,.15) -- cycle;
-    \fill[color=palette primary.bg] ([shift={(.1,-.1)}] current bounding box.north west) -- +(.15,0) -- +(0,-.15) -- cycle;
+    \fill[color=palette primary.fg] ([shift={(.1,.1)}] current bounding box.south west) -- +(.15,0) -- +(0,.15) -- cycle;
+    \fill[color=palette primary.fg] ([shift={(-.1,.1)}] current bounding box.south east) -- +(-.15,0) -- +(0,.15) -- cycle;
+    \fill[color=palette primary.fg] ([shift={(.1,-.1)}] current bounding box.north west) -- +(.15,0) -- +(0,-.15) -- cycle;
 
     \fill[palette primary.fg]
       ([shift={(0,-.75)}] current page.north east)
@@ -47,45 +118,75 @@
     \coordinate (midpoint) at
       ($ ([shift={(0,-.675)}] current page.north east) !.5! ([shift={(-.675,0)}] current page.north east) $);
 
-    \node[
-      fill=normal text.bg,
-      circle,
-      inner sep=0,
-      minimum size=7pt
-    ] at (midpoint) {};
+    \usebeamertemplate{background band shape}
 
-    \node[
-      draw=palette primary.fg,
-      thin,
-      circle,
-      inner sep=0,
-      minimum size=4.5pt
-    ] at (midpoint) {};
-
-    \node[
-      fill=palette primary.fg,
-      thin,
-      circle,
-      inner sep=0,
-      minimum size=1pt
-    ] at (midpoint) {};
   \end{tikzpicture}
 }
 
-% ---------- %
-% Title page %
-% ---------- %
-\defbeamertemplate{title page}{LightRound}[1][]
+% ----------------------- %
+% Title and section pages %
+% ----------------------- %
+
+\newcommand{\LightTheme@inner@titlepage@shape}[2]
+{
+  \node[
+    fill=background canvas.bg,
+    #1,
+    inner sep=0,
+    minimum size=#2
+  ] at (midpoint) {};
+
+  \node[
+    draw=palette primary.fg,
+    thick,
+    #1,
+    inner sep=0,
+    minimum size=0.7*#2
+  ] at (midpoint) {};
+
+  \node[
+    fill=palette primary.fg,
+    thin,
+    #1,
+    inner sep=0,
+    minimum size=0.14*#2
+  ] at (midpoint) {};
+}
+
+\defbeamertemplate{title page band shape}{circle}[1]
+{
+  \LightTheme@inner@titlepage@shape{circle}{1cm}
+}
+
+\defbeamertemplate{title page band shape}{regular polygon}[1]
+{
+  \ifthenelse{#1 < 5}{%
+    \LightTheme@inner@titlepage@shape{regular polygon, regular polygon sides=#1}{1.3cm}
+  }{%
+    \LightTheme@inner@titlepage@shape{regular polygon, regular polygon sides=#1}{1.1cm}
+  }
+}
+
+% I actually do not understand how or why this works, or how I would do this
+% without this \@nameuse command.
+% Source: https://tex.stackexchange.com/a/323638/39313
+\def\ps@footline@none{%
+  \setbeamertemplate{footline}{}%
+  \@nameuse{ps@footline}}
+
+\setbeamertemplate{title page}
 { 
+  \thispagestyle{footline@none}
   \begin{tikzpicture}[overlay,remember picture]
     \usebeamercolor{normal text}
     \usebeamercolor{palette primary}
+    \usebeamercolor{background canvas}
 
     \clip
       ([shift={(.1,.1)}] current page.south west) rectangle
       ([shift={(-.1,-.1)}] current page.north east);
 
-    \fill[normal text.bg] (current page.north east) rectangle +(-2,-2);
+    \fill[background canvas.bg] (current page.north east) rectangle +(-2,-2);
 
     \draw[
       color=palette primary.fg,
@@ -112,28 +213,7 @@
     \coordinate (midpoint) at
       ($ ([shift={(0,-5.25)}] current page.north west) !.5! ([shift={(5.25,0)}] current page.north west) $);
 
-    \node[
-      fill=normal text.bg,
-      circle,
-      inner sep=0,
-      minimum size=1cm
-    ] at (midpoint) {};
-
-    \node[
-      draw=palette primary.fg,
-      thin,
-      circle,
-      inner sep=0,
-      minimum size=.7cm
-    ] at (midpoint) {};
-
-    \node[
-      fill=palette primary.fg,
-      thin,
-      circle,
-      inner sep=0,
-      minimum size=.1cm
-    ] at (midpoint) {};
+    \usebeamertemplate{title page band shape}
 
     \coordinate (title corner) at
       ([shift={(-2em,-2)}] current page.east);
@@ -200,9 +280,45 @@
   \end{tikzpicture}
 }
 
-% ------ %
-% blocks %
-% ------ %
+\setbeamertemplate{section page}
+{
+  \thispagestyle{footline@none}
+  \begingroup
+    \centering
+    \vskip1cm\par
+    \begin{beamercolorbox}[sep=12pt,center]{section title}
+      \usebeamerfont{section title}\insertsection\par
+    \end{beamercolorbox}
+  \endgroup
+}
+
+% ------------------ %
+% Block environments %
+% ------------------ %
+
+\newcommand{\LightTheme@inner@block@shape}[2]
+{
+  \node[
+    inner sep=0,
+    minimum size=#2,
+    fill=fg,
+    #1
+  ] at ([shift={(225:.12)}] BOXCONTENT.north east) {};
+}
+
+\defbeamertemplate{block corner shape}{circle}[1]
+{
+  \LightTheme@inner@block@shape{circle}{1.25pt}
+}
+
+\defbeamertemplate{block corner shape}{regular polygon}[1]
+{
+  \ifthenelse{#1 < 6}{%
+    \LightTheme@inner@block@shape{regular polygon, regular polygon sides=#1}{1.5pt}
+  }{%
+    \LightTheme@inner@block@shape{regular polygon, regular polygon sides=#1}{1.25pt}
+  }
+}
 
 \newcommand{\LightTheme@block@begin}[2]{%
   \par\vskip\medskipamount%
@@ -250,31 +366,28 @@
     \fill[#1.fg] (BOXCONTENT.north west) -- +(.1,0) -- +(0,-.1);
     \fill[#1.fg] (BOXCONTENT.north east) -- +(-.1,0) -- +(0,-.1);
 
-    \node[
-      inner sep=0,
-      minimum size=1pt,
-      fill=#1.fg,
-      circle
-    ] at ([shift={(225:.12)}] BOXCONTENT.north east) {};
+    \usebeamercolor{#1}
+    \expandbeamertemplate{block corner shape}
   \end{tikzpicture}
   \vskip\smallskipamount
 }
 
-\defbeamertemplate*{block begin}{LightRound}{%
+\setbeamertemplate{block begin}
+{
   \LightTheme@block@begin{block title}{block body}
 }
 
-\defbeamertemplate*{block end}{LightRound}
+\setbeamertemplate{block end}
 {
   \LightTheme@block@end{block title}
 }
 
-\defbeamertemplate*{block alerted begin}{LightRound}
+\setbeamertemplate{block alerted begin}
 {
   \LightTheme@block@begin{block alerted title}{block alerted body}
 }
 
-\defbeamertemplate*{block alerted end}{LightRound}
+\setbeamertemplate{block alerted end}
 {
   \LightTheme@block@end{block alerted title}
 }
@@ -332,4 +445,5 @@
   \vskip\smallskipamount
 }
 
-\setbeamertemplate{title page}[LightRound]
+\LightTheme@inner@setdefaults
+\ProcessPgfPackageOptions{/LightTheme/inner}

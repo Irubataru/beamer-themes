@@ -1,21 +1,14 @@
-\mode<presentation>
+% -----------------------------------------------------------------------------
+% Beamer theme: LightSquare
+% Copyright (c) 2019 Jonas R. Glesaaen (jonas@glesaaen.com)
+% -----------------------------------------------------------------------------
 
 % Requirement
-\RequirePackage{tikz}
-\usetikzlibrary{positioning,calc}
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{beamerthemeLightSquare}
 
-% Settings
-\useinnertheme{LightSquare}
-\useoutertheme{LightTheme}
-\usecolortheme{LightTheme}
-\usefonttheme{LightTheme}
+\usetheme[shape=square]{LightTheme}
 
-
-\setbeamertemplate{navigation symbols}{}
-
-% Items
-\setbeamertemplate{enumerate items}[square]
-\setbeamertemplate{itemize items}[circle]
-\setbeamertemplate{sections/subsections in toc}[square]
-
-\mode<all>
+\PackageWarning{beamerthememeLightSquare}{%
+  The LightSquare theme is outdated, please use LightTheme instead
+}

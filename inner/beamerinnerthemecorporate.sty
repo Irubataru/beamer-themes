@@ -1,137 +1,176 @@
-\mode<presentation>
+% -----------------------------------------------------------------------------
+% Beamer inner theme: corporate
+% Copyright (c) 2019 Jonas R. Glesaaen (jonas@glesaaen.com)
+% -----------------------------------------------------------------------------
 
-\setbeamertemplate{background}{
-  \begin{tikzpicture}
-  \useasboundingbox (0,0) rectangle(\the\paperwidth,\the\paperheight);
-  \usebeamercolor{palette base}
-  \fill[color=bg] (0,3) rectangle (\the\paperwidth,\the\paperheight);
-  %\coordinate (title corner) at (\the\paperwidth,3);
-  \usebeamercolor{palette primary}
-  \fill[color=bg] (0,0) rectangle(2.95,2.9);
-  \usebeamercolor{palette secondary}
-  \fill[color=bg] (3.05,0) rectangle(\the\paperwidth,2.9);
-  \ifnum\thepage>1\relax%
-   \fill[white,opacity=1] (0,0) rectangle(\the\paperwidth,\the\paperheight);
-   \fi
-  \end{tikzpicture}
-}
+\ProvidesPackage{beamerinnerthemecorporate}
 
-% Title page
-\defbeamertemplate*{title page}{corporate}[1][]
+% ---------- %
+% Title page %
+% ---------- %
+\setbeamertemplate{title page}
 { 
   \begin{tikzpicture}[remember picture, overlay]
+    % Top rectangle
+    \usebeamercolor{palette tertiary}
+    \fill[color=fg]
+      ([yshift=3cm] current page.south west)
+      rectangle (current page.north east);
+
+    % Title and subtitle
     \usebeamercolor{title page header}
     \coordinate (title corner) at ([shift={(0,3)}]current page.south east);
     \ifx\insertsubtitle\@empty%
     % Insert title
     {
-      \node[text=fg,anchor=south east] at ([shift={(-1em,+1em)}]title corner) {%
-        \usebeamerfont{title}\inserttitle%
-      };}
+      \node[
+        text=fg,
+        anchor=south east,
+        font=\usebeamerfont{title}
+      ] at ([shift={(-1em,+1em)}]title corner) {\inserttitle};
+    }
     \else%
     % Insert subtitle, if one exists, doesn't work with overflow
     {
-      \node[text=fg,anchor=south east,align=left] at ([shift={(-2em,+1em)}]title corner) {%
+      \node[
+        text=fg,
+        anchor=south east,
+        align=left
+      ] at ([shift={(-2em,+1em)}] title corner) {
         \usebeamerfont{title}\inserttitle \\
         \hskip.4cm$\hookrightarrow$\hskip3pt\usebeamerfont{subtitle}\insertsubtitle
-      };}
+      };
+    }
     \fi%
 
-    % Insert author
-    \coordinate (info corner) at ([shift={(3.05,2.9)}]current page.south west);
+    % Bottom left rectangle
+    \usebeamercolor{palette secondary}
+    \fill[color=bg]
+      (current page.south west) 
+      rectangle +(
+        \corporate@separationposition - 0.5\corporate@separationwidth,%
+        2.9cm);
+
+    % Bottom right rectangle
+    \usebeamercolor{palette primary}
+    \fill[color=bg]
+      ([shift={(%
+          \corporate@separationposition + 0.5\corporate@separationwidth,%
+          2.9cm)}] current page.south west)
+      rectangle (current page.south east);
+
+    % Author, institute and date
+    \coordinate (info corner) at ([shift={(
+        \corporate@separationposition + 0.5\corporate@separationwidth,%
+        2.9cm)}] current page.south west);
+
+    \ifx\insertauthor\@empty%
+    \else%
     \usebeamercolor{author}
-    \node[text=fg,anchor=north west,align=left] at ([shift={(.5em,-.5em)}]info corner) (author) {%
-      \usebeamerfont{author}\insertauthor%
-        % Insert institute, if it has been given
-        \ifx\insertinstitute\@empty%
-        \else%
-         {\usebeamerfont{institute}\hskip1em-\hskip0.25em\insertinstitute}
-        \fi%
-      };
-      
-      % Insert collaborator if given
-      %\ifx\insertcollaborator\@empty%
-      %\else%
-      %{\node[text=fg,anchor=north west, align=left] at ([shift={(.5cm,-.1em)}]author.south west) {%
-          %\usebeamerfont{institute} in collaboration with \insertcollaborator% 
-          %% Insert collaborator's institute if given
-          %\ifx\insertcollaboratorinst\@empty%
-          %\else%
-            %{\usebeamerfont{institute} \hskip0.25em (\insertcollaboratorinst)}
-          %\fi%
-        %};}
-      %\fi
+    \node[
+      text=fg,
+      anchor=north west,
+      align=left,
+      font=\usebeamerfont{author}
+    ] at ([shift={(.5em,-.5em)}] info corner) (author) {\insertauthor};
+    \fi
 
-      % Insert date
-      \node[text=fg,anchor=south east] at ([shift={(-.5em,.5em)}]current page.south east) {\usebeamerfont{author}\insertdate};
+    \ifx\insertinstitute\@empty%
+    \else%
+    \usebeamercolor{institute}
+    \node[
+      text=fg,
+      anchor=south west,
+      align=left,
+      font=\usebeamerfont{institute}
+    ] at ([xshift=1mm] author.south east) (institute) {-\hspace{.25em}\insertinstitute};
+    \fi
+
+    % Insert date
+    \ifx\insertdate\@empty%
+    \else%
+    \usebeamercolor{date}
+    \node[
+      text=fg,
+      anchor=south east,
+      font=\usebeamerfont{date}
+    ] at ([shift={(-.5em,.5em)}] current page.south east) {\insertdate};
+    \fi
+
   \end{tikzpicture}
 }
 
-% Block environments
-
-\defbeamertemplate*{block begin}{corporate}
-{
-  \par\vskip\medskipamount%
-  \usebeamercolor{palette tertiary}
-  \begin{tikzpicture}
-    \node [draw=bg, inner sep=2ex, text width=\paperwidth - 2cm - 4ex, minimum width=\paperwidth - 2cm] (BOXCONTENT) \bgroup%
-    \usebeamerfont{beamer body}
-}
-
-\defbeamertemplate*{block end}{corporate}
-{
-  \egroup;
-  \usebeamercolor{palette secondary}
-  \ifx\insertblocktitle\@empty
-  \else%
-  {
-    \node[fill=fg,anchor=west,text=bg] at ([shift={(5pt,0)}]BOXCONTENT.north west) {\insertblocktitle};
-  }
-  %{\node [draw=bg,right,inner sep=1.5ex, text width=\paperwidth - 2cm - 3ex, minimum width=\paperwidth - 2cm,anchor=south west] %
-    %at (BOXCONTENT.north west) {\usebeamerfont{block title}\insertblocktitle};
-  %}
+\def\maketitle{%
+  \ifbeamer@inframe
+    \titlepage
+  \else
+    \frame[plain,noframenumbering]{\titlepage}
   \fi
-  \end{tikzpicture}
-  \vskip\smallskipamount
 }
 
-\defbeamertemplate*{block alerted begin}{corporate}
-{
+\def\titlepage{%
+  \usebeamertemplate{title page}
+}
+
+% ------------------ %
+% Block environments %
+% ------------------ %
+
+\newcommand{\corporate@block@begin}[1]{%
   \par\vskip\medskipamount%
-  \usebeamercolor{palette tertiary}
+  \usebeamercolor{#1}
+  \ifx\insertblocktitle\@empty\newcommand{\yskiplength}{1.5ex}
+  \else\newcommand{\yskiplength}{2ex}
+  \fi
   \begin{tikzpicture}
-    \node [draw=bg, inner sep=2ex, text width=\paperwidth - 2cm - 4ex, minimum width=\paperwidth - 2cm,align=left] (BOXCONTENT) \bgroup \noindent%
+    \node [
+      draw=black,
+      fill=#1.bg,
+      inner sep = 1ex,
+      inner ysep = \yskiplength,
+      text width=\paperwidth - 2cm - 5ex, 
+      minimum width=\paperwidth - 2cm - 1ex
+    ] (BOXCONTENT) \bgroup%
+    \begin{minipage}{\textwidth}
     \usebeamerfont{beamer body}%
+    \usebeamercolor{#1}%
 }
 
-\defbeamertemplate*{block alerted end}{corporate}
-{
-  \egroup;
-  \usebeamercolor{palette primary}
-  \ifx\insertblocktitle\@empty
-  \else%
-  {
-    \node[fill=fg,anchor=west,text=bg] at ([shift={(5pt,0)}]BOXCONTENT.north west) {\insertblocktitle};
-  }
-  %{\node [fill=bg,text=fg,right,inner sep=1.5ex, text width=\paperwidth - 2cm - 3ex, minimum width=\paperwidth - 2cm,anchor=south west] %
-    %at (BOXCONTENT.north west) {\usebeamerfont{block title}\insertblocktitle};
-  %}
-  \fi
+\newcommand{\corporate@block@end}[1]{%
+    \end{minipage}%
+    \egroup;
+    \usebeamercolor{#1}
+    \ifx\insertblocktitle\@empty
+    \else%
+    {
+      \node[
+        fill=#1.bg,
+        anchor=west,
+        text=#1.fg,
+        inner ysep = 1.5pt
+      ] at ([shift={(5pt,0)}]BOXCONTENT.north west) {\insertblocktitle};
+    }
+    \fi
   \end{tikzpicture}
   \vskip\smallskipamount
 }
 
-%\defbeamertemplate*{block end}{corporate}
-%{
-  %\egroup;
-  %\usebeamercolor{palette primary}
-  %\node [draw=bg,right, inner xsep=1ex, inner ysep=2pt ,fill=fg, outer sep=0pt, text height=2ex, anchor=south west] at ([shift={(-.5em,-.2em)}]BOXCONTENT.north west)%
-   %(BOXHEADER) {\insertblocktitle};
-   %\fill [color=bg] (BOXHEADER.south west) -- +(.5em,-.5em) -- +(.5em,0) -- cycle;
-   %\fill [color=bg] (BOXHEADER.north east) -- +(-.5em,.5em) -- +(-.5em,0) -- cycle;
-  %\end{tikzpicture}
-  %\vskip\smallskipamount
-%}
+\setbeamertemplate{block begin}
+{
+  \corporate@block@begin{block body}
+}
 
-\mode
-<all>
+\setbeamertemplate{block end}
+{
+  \corporate@block@end{block title}
+}
+
+\setbeamertemplate{block alerted begin}
+{
+  \corporate@block@begin{block alerted body}
+}
+
+\setbeamertemplate{block alerted end}
+{
+  \corporate@block@end{block alerted title}
+}

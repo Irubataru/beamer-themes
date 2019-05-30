@@ -1,3 +1,8 @@
+% -----------------------------------------------------------------------------
+% Beamer outer theme: LightTheme
+% Copyright (c) 2019 Jonas R. Glesaaen (jonas@glesaaen.com)
+% -----------------------------------------------------------------------------
+
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{beamerouterthemeLightTheme}
 \RequirePackage{etoolbox}
@@ -11,6 +16,7 @@
     counter/.code=\setbeamertemplate{frame numbering}[counter],
     fraction/.code=\setbeamertemplate{frame numbering}[fraction],
 }
+
 \newcommand{\LightTheme@outer@setdefaults}{
   \pgfkeys{/LightTheme/outer/.cd,
     numbering=counter,

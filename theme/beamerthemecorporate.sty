@@ -1,13 +1,35 @@
-\mode<presentation>
+% -----------------------------------------------------------------------------
+% Beamer theme: corporate
+% Copyright (c) 2019 Jonas R. Glesaaen (jonas@glesaaen.com)
+% -----------------------------------------------------------------------------
 
 % Requirement
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{beamerthememecorporate}
 \RequirePackage{tikz}
-\usetikzlibrary{positioning}
+\RequirePackage{pgfopts}
+
+\pgfkeys{/corporate/.cd,
+  .search also={
+    /corporate/outer,
+    /corporate/inner,
+  }
+}
+
+\usetikzlibrary{positioning, calc}
+
+% Some theme sizes
+\newlength{\corporate@separationposition}
+\setlength{\corporate@separationposition}{2cm}
+
+\newlength{\corporate@separationwidth}
+\setlength{\corporate@separationwidth}{1mm}
 
 % Settings
 \useinnertheme{corporate}
 \useoutertheme{corporate}
 \usecolortheme{corporate}
+\usefonttheme{corporate}
 
 \setbeamertemplate{navigation symbols}{}
 
@@ -15,4 +37,9 @@
 \setbeamertemplate{items}[square]
 \setbeamertemplate{sections/subsections in toc}[square]
 
-\mode<all>
+\pgfkeys{/corporate/.cd,
+  noslidenumbers/.code=\pgfkeysalso{outer/numbering=none},
+  nofootline/.code=\pgfkeysalso{outer/footline=none},
+}
+
+\ProcessPgfOptions{/corporate}

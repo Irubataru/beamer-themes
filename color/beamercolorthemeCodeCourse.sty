@@ -1,9 +1,16 @@
-\mode<presentation>
+% -----------------------------------------------------------------------------
+% Beamer colour theme: CodeCourse
+% Copyright (c) 2019 Jonas R. Glesaaen (jonas@glesaaen.com)
+% -----------------------------------------------------------------------------
 
-% Requirement
+% Requirements
+\ProvidesPackage{beamercolorthemeCodeCourse}
 \RequirePackage{xcolor}
 
-% Colours
+% ------------------ %
+% Colour definitions %
+% ------------------ %
+
 \definecolor{Tropiteal}{RGB}{0,168,198}
 \definecolor{TealDrop}{RGB}{64,192,203}
 \definecolor{WhiteTrash}{RGB}{249,242,231}
@@ -12,44 +19,112 @@
 \definecolor{ICantExpress}{RGB}{28,20,13}
 \definecolor{Marty}{RGB}{250,42,0}
 
-% Settings
-\setbeamercolor*{title page header}{fg=Tropiteal}
-\setbeamercolor*{title}{fg=WhiteTrash}
-\setbeamercolor*{section}{fg=Tropiteal}
-\setbeamercolor*{author}{fg=ICantExpress}
-\setbeamercolor*{date}{fg=ICantExpress}
-\setbeamercolor*{header text}{fg=ICantExpress}
+% ------------ %
+% Text colours %
+% ------------ %
+
 \setbeamercolor*{normal text}{fg=ICantExpress}
+
+\setbeamercolor*{title}{fg=WhiteTrash}
+\setbeamercolor*{author}{fg=ICantExpress}
+\setbeamercolor*{institute}{use=author, parent=author}
+\setbeamercolor*{date}{use=author, parent=author}
+
+\setbeamercolor*{section title}{use=title, parent=title}
+
 \setbeamercolor*{frametitle}{fg=Tropiteal}
 \setbeamercolor*{framesubtitle}{fg=TealDrop}
-\setbeamercolor*{section title}{fg=WhiteTrash}
+
+\setbeamercolor*{frame numbering}{fg=Tropiteal}
+
+% Bibliography
 \setbeamercolor*{bibliography item}{fg=FeebleWeek}
 \setbeamercolor*{bibliography entry author}{fg=Tropiteal}
 \setbeamercolor*{bibliography entry location}{fg=TealDrop}
 \setbeamercolor*{bibliography entry title}{fg=ICantExpress}
 
+% ------------------ %
+% Background colours %
+% ------------------ %
+
 \setbeamercolor*{background canvas}{bg=WhiteTrash}
+
 \setbeamercolor*{title page background canvas}{bg=Tropiteal}
-\setbeamercolor*{section page background canvas}{bg=Tropiteal}
+
+\setbeamercolor*{section page background canvas}{
+  use=title page background canvas,
+  parent=title page background canvas
+}
+
+% ------------- %
+% Block colours %
+% ------------- %
 
 % For the boxes
-\setbeamercolor*{palette base}{bg=Tropiteal}
-\setbeamercolor*{palette primary}{bg=ICantExpress,fg=WhiteTrash}
-\setbeamercolor*{palette secondary}{bg=Tropiteal,fg=WhiteTrash}
-\setbeamercolor*{palette tertiary}{bg=Tropiteal,fg=WhiteTrash}
-\setbeamercolor*{palette quatenary}{bg=Tropiteal,fg=WhiteTrash}
+%\setbeamercolor*{palette base}{bg=Tropiteal}
+%\setbeamercolor*{palette primary}{bg=ICantExpress,fg=WhiteTrash}
+%\setbeamercolor*{palette secondary}{bg=Tropiteal,fg=WhiteTrash}
+%\setbeamercolor*{palette tertiary}{bg=Tropiteal,fg=WhiteTrash}
+%\setbeamercolor*{palette quatenary}{bg=Tropiteal,fg=WhiteTrash}
 
+% Regular block
+\setbeamercolor*{block title}{
+  use={background canvas},
+  fg=TealDrop,
+  bg=background canvas.bg
+}
 
-% For the blocks
-\setbeamercolor*{block title}{fg=TealDrop,bg=WhiteTrash}
-\setbeamercolor*{block title alerted}{fg=Marty,bg=WhiteTrash}
-\setbeamercolor*{block title example}{fg=FeebleWeek,bg=WhiteTrash}
+\setbeamercolor*{block box}{
+  use={block title,background canvas},
+  fg=block title.fg,
+  bg=background canvas.bg
+}
 
-% Items
+\setbeamercolor*{block body}{
+  use=normal text,
+  parent=normal text
+}
+
+% Alerted block
+\setbeamercolor*{block title alerted}{
+  use={background canvas},
+  fg=Marty,
+  bg=background canvas.bg
+}
+
+\setbeamercolor*{block box alerted}{
+  use={block title alerted,background canvas},
+  fg=block title alerted.fg,
+  bg=background canvas.bg
+}
+
+\setbeamercolor*{block body alerted}{
+  use=normal text,
+  parent=normal text
+}
+
+% Example block
+\setbeamercolor*{block title example}{
+  use={background canvas},
+  fg=FeebleWeek,
+  bg=background canvas.bg
+}
+
+\setbeamercolor*{block box example}{
+  use={block title example,background canvas},
+  fg=block title example.fg,
+  bg=background canvas.bg
+}
+
+\setbeamercolor*{block body example}{
+  use=normal text,
+  parent=normal text
+}
+
+% ---------------------- %
+% Items and enumerations %
+% ---------------------- %
+
 \setbeamercolor*{item}{fg=FeebleWeek,bg=WhiteTrash}
 \setbeamercolor*{alerted text}{fg=AtomicBikini,bg=WhiteTrash}
-\setbeamercolor{section in toc}{fg=TealDrop,bg=WhiteTrash}
-
-
-\mode
-<all>
+\setbeamercolor*{section in toc}{fg=TealDrop,bg=WhiteTrash}

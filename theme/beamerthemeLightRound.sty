@@ -1,37 +1,14 @@
+% -----------------------------------------------------------------------------
+% Beamer theme: LightRound
+% Copyright (c) 2019 Jonas R. Glesaaen (jonas@glesaaen.com)
+% -----------------------------------------------------------------------------
+
 % Requirement
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{beamerthememeLightRoound}
-\RequirePackage{etoolbox}
-\RequirePackage{tikz}
-\RequirePackage{pgfopts}
+\ProvidesPackage{beamerthemeLightRound}
 
-\pgfkeys{/LightTheme/.cd,
-  .search also={
-    /LightTheme/outer,
-  }
+\usetheme[shape=circle]{LightTheme}
+
+\PackageWarning{beamerthememeLightRound}{%
+  The LightRound theme is outdated, please use LightTheme instead
 }
-\usetikzlibrary{positioning,calc}
-
-% Settings
-\useinnertheme{LightRound}
-\useoutertheme{LightTheme}
-\usecolortheme{LightTheme}
-\usefonttheme{LightTheme}
-
-\setbeamertemplate{navigation symbols}{}
-
-% Items
-\setbeamertemplate{enumerate items}[square]
-\setbeamertemplate{itemize items}[circle]
-\setbeamertemplate{sections/subsections in toc}[square]
-
-\pgfkeys{/LightTheme/.cd,
-  noslidenumbers/.code=\pgfkeysalso{outer/numbering=none},
-}
-
-\AtEndPreamble{%
-  \@ifpackageloaded{pgfplots}{%
-    \RequirePackage{pgfplotsthemetol}
-  }{}
-}
-\ProcessPgfOptions{/LightTheme}

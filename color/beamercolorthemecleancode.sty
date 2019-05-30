@@ -1,36 +1,125 @@
-\mode<presentation>
+% -----------------------------------------------------------------------------
+% Beamer colour theme: cleancode
+% Copyright (c) 2019 Jonas R. Glesaaen (jonas@glesaaen.com)
+% -----------------------------------------------------------------------------
 
 % Requirement
+\ProvidesPackage{beamercolorthemecleancode}
 \RequirePackage{xcolor}
 
-% Colours
-%\colorlet{blockcolor}{RoyalBlue!80!Black}
-\colorlet{blockcolor}{MidnightBlue}
-\colorlet{codeblockcolor}{OliveGreen!80!Black}
-\colorlet{alertblockcolor}{Bittersweet}
-\colorlet{quoteblockprimary}{MidnightBlue}
-\colorlet{quoteblocksecondary}{Gray}
+% ------- %
+% Colours %
+% ------- %
 
-% Text
-\setbeamercolor{normal text}{fg=black,bg=white}
-\setbeamercolor{alerted text}{fg=alertblockcolor}
-\setbeamercolor{example text}{fg=codeblockcolor}
+\setbeamercolor*{palette primary}{fg=MidnightBlue, bg=MidnightBlue}
+\setbeamercolor*{palette secondary}{fg=Bittersweet, bg=Bittersweet}
+\setbeamercolor*{palette tertiary}{fg=OliveGreen!80!Black, bg=OliveGreen!80!Black}
+\setbeamercolor*{palette quaternary}{fg=Gray, bg=Gray}
 
-\setbeamercolor{structure}{fg=blockcolor}
+\setbeamercolor*{background canvas}{bg=white}
 
-% Palette
-\setbeamercolor{palette primary}{fg=blockcolor}
-\setbeamercolor{palette secondary}{fg=alertblockcolor}
-\setbeamercolor{palette tertiary}{fg=codeblockcolor}
-\setbeamercolor{palette quaternary}{fg=quoteblockprimary, bg=quoteblocksecondary}
+% ---- %
+% Text %
+% ---- %
 
-% For the boxes
-\setbeamercolor{block body}{fg=black}
-\setbeamercolor{block body alerted}{}
-\setbeamercolor{block body example}{}
-\setbeamercolor{block title}{fg=blockcolor}
-\setbeamercolor{block title alerted}{fg=alertblockcolor}
-\setbeamercolor{block title example}{fg=codeblockcolor}
+\setbeamercolor{normal text}{
+  fg=black
+}
 
-\mode
-<all>
+\setbeamercolor{alerted text}{
+  use=palette secondary,
+  fg=palette secondary.fg
+}
+
+\setbeamercolor{example text}{
+  use=palette tertiary,
+  fg=palette tertiary.fg
+}
+
+\setbeamercolor{structure}{
+  use=palette primary,
+  fg=palette primary.fg
+}
+
+% ------------------ %
+% Block environments %
+% ------------------ %
+
+% Normal blocks
+
+\setbeamercolor{block body}{
+  use=normal text,
+  parent=normal text
+}
+
+\setbeamercolor{block box}{
+  use={palette primary, background canvas},
+  fg=palette primary.fg,
+  bg=background canvas.bg
+}
+
+\setbeamercolor{block title}{
+  use=block box,
+  parent=block box
+}
+
+% Alerted blocks
+
+\setbeamercolor{block body alerted}{
+  use=normal text,
+  parent=normal text
+}
+
+\setbeamercolor{block box alerted}{
+  use={palette secondary, background canvas},
+  fg=palette secondary.fg,
+  bg=background canvas.bg
+}
+
+\setbeamercolor{block title alerted}{
+  use=block box alerted,
+  parent=block box alerted
+}
+
+% Example blocks
+
+\setbeamercolor{block body example}{
+  use=normal text,
+  parent=normal text
+}
+
+\setbeamercolor{block box example}{
+  use={palette tertiary, background canvas},
+  fg=palette tertiary.fg,
+  bg=background canvas.bg
+}
+
+\setbeamercolor{block title example}{
+  use=block box example,
+  parent=block box example
+}
+
+% Quotation bocks
+
+\setbeamercolor{block body quote}{
+  use=palette primary,
+  fg=palette primary.fg
+}
+
+\setbeamercolor{block box quote}{
+  use={palette primary, background canvas},
+  fg=palette primary.fg,
+  bg=background canvas.bg
+}
+
+\setbeamercolor{block title quote}{
+  use=block box quote,
+  fg=block box quote.bg,
+  bg=block box quote.fg
+}
+
+\setbeamercolor{block author quote}{
+  use={palette quaternary, background canvas},
+  fg=palette quaternary.fg,
+  bg=background canvas.bg
+}
